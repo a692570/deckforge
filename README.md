@@ -9,7 +9,7 @@ Selected: DeckForge
 
 # DeckForge
 
-AI prompt kit for generating polished, professional HTML presentations. Works with any AI coding assistant—Claude Code, Cursor, Codex CLI, Windsurf, Aider, or just paste into ChatGPT/Claude web.
+AI presentation skill for generating polished, professional HTML presentations. Works with any AI coding assistant—Claude Code, Cursor, Codex CLI, Windsurf, Aider, or just paste into ChatGPT/Claude web.
 
 ## ✨ What You Get
 
@@ -63,7 +63,7 @@ git clone https://github.com/a692570/deckforge.git presentation-maker
 
 ## 📋 Requirements
 
-**You need:** Access to any LLM (Claude, GPT-4, Gemini, etc.)
+**You need:** Access to any LLM (Claude, GPT-5.2, Gemini 3 Pro, etc.)
 
 **Optional:** For PowerPoint export, install Python dependencies:
 ```bash
