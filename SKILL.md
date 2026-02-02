@@ -1,15 +1,10 @@
----
-name: presentation-maker
-description: Create polished, professional HTML presentations with AI content generation, custom illustrations, and multi-format export (PPTX, PDF). Produces Gamma-quality output with modern design standards.
----
+# DeckForge — AI Presentation Workflow
 
-# Presentation Maker
-
-Create stunning, presentation-ready slide decks from a simple topic idea. This skill handles everything: content planning, visual design, custom image generation, and export to multiple formats.
+Create stunning, presentation-ready slide decks from a simple topic idea. This document describes a complete workflow for generating professional HTML presentations with AI assistance.
 
 ## Output Quality Standard
 
-Every presentation should feel like it belongs on a top-tier SaaS marketing page. Clean, confident, minimal, developer-friendly.
+Every presentation should feel like it belongs on a top-tier SaaS marketing page. Clean, confident, minimal, professional.
 
 ---
 
@@ -76,9 +71,9 @@ Get user approval on the outline before proceeding.
 
 ---
 
-### Phase 2: HTML Generation (Primary Agent)
+### Phase 2: HTML Generation
 
-The primary agent writes the complete HTML presentation. This is too large for a sub-agent.
+Write the complete HTML presentation. This is the main creative work.
 
 **Design requirements:**
 
@@ -214,7 +209,7 @@ blockquote { font-size: 1.5rem; font-style: italic; max-width: 800px; }
 - ❌ Identical layouts repeated
 - ❌ "In today's rapidly evolving world..." copy
 - ❌ Center-aligning everything
-- ❌ System fonts (Inter, Roboto) without intention
+- ❌ System fonts without intention
 
 ---
 
@@ -222,13 +217,13 @@ blockquote { font-size: 1.5rem; font-style: italic; max-width: 800px; }
 
 Fill image placeholders with appropriate visuals.
 
-**When to use AI-generated images (nano-banana-pro):**
+**When to use AI-generated images:**
 - Custom illustrations/diagrams
 - Product mockups that don't exist yet
 - Abstract concepts that need visualization
 - Unique branded illustrations
 
-**When to use stock photos (web_search):**
+**When to use stock photos:**
 - Real-world scenes, people, locations
 - Established product screenshots
 - General business/technology imagery
@@ -269,9 +264,9 @@ Fill image placeholders with appropriate visuals.
 
 ---
 
-### Phase 4: Design Review (Kimi Sub-Agent)
+### Phase 4: Design Review
 
-Spawn Kimi to audit and refine the HTML.
+Audit and refine the HTML for quality.
 
 **Review checklist:**
 ```
@@ -286,32 +281,12 @@ Spawn Kimi to audit and refine the HTML.
 □ Animation — Subtle, not distracting
 ```
 
-**Spawn command:**
-```
-[ROLE: Presentation Design Auditor]
-
-Review this HTML presentation for quality and design standards:
-- File: [presentation.html]
-- Target: Professional SaaS marketing page quality
-- Style: [Modern SaaS / chosen style]
-
-Check for:
-1. Visual hierarchy and reading flow
-2. Copy quality (eliminate AI slop phrases)
-3. Layout variety across slides
-4. Color/typography consistency
-5. Accessibility compliance
-6. Image placement and quality
-
-Apply fixes directly to the HTML file. Focus on:
-- Tightening copy (shorter headlines, punchier bullets)
-- Adjusting spacing and alignment
-- Ensuring consistent styling
-- Adding missing alt text
-- Removing any generic filler content
-
-Return a summary of changes made.
-```
+Apply fixes directly:
+- Tighten copy (shorter headlines, punchier bullets)
+- Adjust spacing and alignment
+- Ensure consistent styling
+- Add missing alt text
+- Remove generic filler content
 
 ---
 
@@ -321,10 +296,10 @@ Generate all deliverable formats.
 
 **Step 5.1: PPTX Export**
 ```bash
-python3 skills/presentation-maker/scripts/pptx_export.py [presentation].html --output [presentation].pptx
+python3 scripts/pptx_export.py [presentation].html --output [presentation].pptx
 ```
 
-The upgraded exporter handles:
+The exporter handles:
 - Slide backgrounds from CSS
 - Image embedding
 - Typography sizing (h1/h2/body)
@@ -338,7 +313,7 @@ The upgraded exporter handles:
 chrome --headless --print-to-pdf=[presentation].pdf --run-all-compositor-stages-before-draw --virtual-time-budget=5000 [presentation].html
 ```
 
-Or use browser automation:
+Or manually:
 1. Open HTML in browser
 2. Wait for animations to settle
 3. Print to PDF (landscape, 16:9)
@@ -472,15 +447,6 @@ class SlidePresentation {
 
 ---
 
-## Related Skills
-
-- **nano-banana-pro** — Generate custom illustrations and diagrams
-- **web_search** — Find stock photos and reference material
-- **web_fetch** — Download images from Unsplash/Pexels
-- **browser** — Preview presentations, print to PDF
-
----
-
 ## Example Sessions
 
 ### AI-Generated Pitch Deck
@@ -490,7 +456,7 @@ User: "Create a pitch deck for my AI startup"
 → Generate outline → Get approval
 → Write HTML with varied layouts
 → Generate custom product mockup image
-→ Audit with Kimi, apply fixes
+→ Audit and apply fixes
 → Export PPTX + PDF
 → Deliver all files
 ```
@@ -499,7 +465,7 @@ User: "Create a pitch deck for my AI startup"
 ```
 User: "Turn these notes into a presentation: [content]"
 → Structure into slide outline
-→ Pick style (Telnyx Modern)
+→ Pick style (Modern SaaS)
 → Generate HTML
 → Add relevant stock photos
 → Export formats
@@ -519,9 +485,8 @@ User: "Make 3 style options for my deck"
 
 ## Requirements
 
-- Python 3 with `python-pptx` library
+- Python 3 with `python-pptx` library (for PPTX export)
 - Modern browser (Chrome/Edge/Firefox/Safari)
-- Optional: nano-banana-pro skill for AI images
 
 ---
 
