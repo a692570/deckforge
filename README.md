@@ -9,7 +9,7 @@ Selected: DeckForge
 
 # DeckForge
 
-AI presentation skill for generating polished, professional HTML presentations. Works with any AI coding assistant—Claude Code, Cursor, Codex CLI, Windsurf, Aider, or just paste into ChatGPT/Claude web.
+AI presentation skill for generating polished, professional HTML presentations. Built for AI coding agents with file system access—Claude Code, Cursor, Codex CLI, Windsurf, Aider, and OpenClaw.
 
 ## ✨ What You Get
 
@@ -22,29 +22,32 @@ AI presentation skill for generating polished, professional HTML presentations. 
 - **📝 Speaker Notes** — Hidden presenter notes (exported to PowerPoint too)
 - **🎯 No "AI Slop"** — Clean, professional designs without generic gradients or filler copy
 
-## 🚀 Quick Start (Pick Your Path)
+## 🚀 Quick Start
 
-### Option 1: With Claude Code / Cursor / Any AI IDE
+### Option 1: With Claude Code, Cursor, or Any AI Coding Agent
 
-Just drop these files in your project folder and ask:
+Drop these files into your project folder. The AI reads `SKILL.md` and `STYLE_PRESETS.md` as context, then executes the full workflow:
+
 ```
 "Create a pitch deck about [your topic] following the workflow in SKILL.md"
 ```
 
-The AI will read `SKILL.md` and `STYLE_PRESETS.md` and generate everything.
+The agent will:
+1. Parse the 5-phase workflow from `SKILL.md`
+2. Generate an outline for your approval
+3. Write complete HTML with your chosen theme
+4. Execute export scripts to generate PPTX/PDF
 
-### Option 2: Standalone (ChatGPT, Claude Web, etc.)
-
-1. Open `SKILL.md`
-2. Copy the entire contents
-3. Paste into your AI chat as a system prompt
-4. Ask: "Create a presentation about [your topic]"
-
-### Option 3: With OpenClaw
+### Option 2: With OpenClaw
 
 ```bash
 cd ~/.openclaw/skills  # or your OpenClaw skills path
 git clone https://github.com/a692570/deckforge.git presentation-maker
+```
+
+Then reference the skill in your prompts:
+```
+"Use the presentation-maker skill to create a deck about [topic]"
 ```
 
 ## 💡 Example Prompts
@@ -63,14 +66,15 @@ git clone https://github.com/a692570/deckforge.git presentation-maker
 
 ## 📋 Requirements
 
-**You need:** Access to any LLM (Claude, GPT-5.2, Gemini 3 Pro, etc.)
+**Required:** An AI coding agent with file system and terminal access
+- Claude Code, Cursor, Windsurf, Codex CLI, Aider, or OpenClaw
 
-**Optional:** For PowerPoint export, install Python dependencies:
+**Optional:** Python 3 with `python-pptx` for PowerPoint export:
 ```bash
 pip3 install python-pptx
 ```
 
-That's it. No API keys. No complex setup.
+No API keys. No external services. The agent does all the work locally.
 
 ## 🎨 Theme Presets
 
