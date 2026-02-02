@@ -14,6 +14,7 @@ AI prompt kit for generating polished, professional HTML presentations. Works wi
 ## ✨ What You Get
 
 - **🎨 11 Curated Themes** — From SaaS modern to cyberpunk neon to editorial elegance
+- **🏢 Brand Import** — Extract styles from existing PPTXs, websites, or brand guidelines PDFs
 - **📱 HTML Slides** — Full animations, keyboard navigation, responsive design
 - **📊 PPTX Export** — Convert to PowerPoint with styling preserved
 - **🖼️ Image Integration** — AI-generated illustrations + stock photo guidance
@@ -86,8 +87,26 @@ That's it. No API keys. No complex setup.
 | Warm Editorial | Human, photographic, magazine | Brand storytelling |
 | Brutalist | Raw, bold, unconventional | Creative pitches, art talks |
 | Gradient Wave | Modern SaaS, energetic | Startup pitches |
+| **Custom Brand** | Your company's exact colors/fonts | Any branded presentation |
 
 See `STYLE_PRESETS.md` for full CSS, fonts, and color codes for each theme.
+
+### 🏢 Brand Import
+
+Match your company's existing visual identity by importing from:
+
+- **Existing PPTX files** — Extract colors, fonts, and backgrounds from PowerPoint themes
+- **Company websites** — Pull CSS colors and typography from any URL
+- **Brand guidelines PDFs** — Parse official design tokens from brand documents
+
+**Example prompts:**
+```
+"Create a presentation using the brand from attached company-deck.pptx"
+"Match the brand style of https://linear.app for this pitch deck"
+"Use our brand-guidelines.pdf to style a 10-slide product launch deck"
+```
+
+Works with any AI that can read files or fetch URLs. No special API keys needed.
 
 ## 📤 Output Formats
 

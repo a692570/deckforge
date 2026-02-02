@@ -540,6 +540,67 @@ class ParticleSystem {
 
 ---
 
+## Custom Brand Presets
+
+Generate your own presets using the **Brand Import Workflow** (see `SKILL.md`). This lets you extract brand tokens from existing assets and create presentations that match your company's visual identity.
+
+### How to Create Custom Presets
+
+1. **From PPTX**: Unzip a PowerPoint file, parse `ppt/theme/theme1.xml` for colors and fonts
+2. **From URL**: Fetch a website, extract CSS color variables and font-family declarations  
+3. **From PDF**: Read brand guidelines, extract hex codes and typography rules
+
+### Custom Preset Template
+
+Use this format when generating brand-derived presets:
+
+```css
+/* Custom Brand Preset: [Source/Company Name] */
+/* Generated from: [pptx/url/pdf source] */
+
+:root {
+    /* Core Backgrounds */
+    --bg-primary: #ffffff;           /* Light background */
+    --bg-secondary: #f8f9fa;         /* Subtle variation */
+    --bg-dark: #0A0A0A;              /* Dark sections */
+    
+    /* Text Colors */
+    --text-primary: #1a1a1a;         /* Main body text */
+    --text-secondary: #666666;       /* Muted/caption text */
+    --text-on-dark: #ffffff;         /* Text on dark bg */
+    --text-muted-on-dark: #a0a0a0;   /* Subtle text on dark */
+    
+    /* Brand Accents */
+    --accent: #00E3AA;               /* Primary brand color */
+    --accent-secondary: #[hex];      /* Secondary accent */
+    --accent-tertiary: #[hex];       /* Tertiary if needed */
+    
+    /* Typography */
+    --font-display: '[Brand Display Font]', sans-serif;
+    --font-body: '[Brand Body Font]', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    /* Spacing & Borders */
+    --slide-padding: 4rem;
+    --border: #e5e5e5;
+    --border-dark: #333333;
+    
+    /* Animation */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+```
+
+### Preset Naming
+
+Name your custom preset descriptively:
+- `/* Custom: Linear App */`
+- `/* Custom: Acme Corp Brand */`
+- `/* Custom: 2024 Rebrand Guidelines */`
+
+Store generated presets in your project or share them with your team for consistent presentation styling.
+
+---
+
 ## DO NOT USE (Generic AI Patterns)
 
 Avoid these overused patterns that create "AI slop":

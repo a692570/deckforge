@@ -355,6 +355,202 @@ Provide all three files:
 
 ---
 
+## Brand Import Workflow
+
+Extract brand tokens from existing assets and auto-generate custom style presets. This enables presentations that match your company's existing visual identity without manual color picking.
+
+### From PPTX (PowerPoint Files)
+
+Read an existing .pptx file to extract its theme and styling:
+
+**Step 1: Unzip and locate theme files**
+```bash
+unzip -q company-deck.pptx -d pptx_extracted/
+```
+
+**Step 2: Parse theme XML (`ppt/theme/theme1.xml`)**
+
+Look for these elements:
+- `<a:clrScheme>` — Color scheme with names: `dk1`, `dk2`, `lt1`, `lt2`, `accent1` through `accent6`
+- Each color has an `<a:srgbClr val="RRGGBB"/>` or `<a:sysClr val="..."/>` element
+- Example extraction:
+  ```xml
+  <a:dk1><a:srgbClr val="1A1A1A"/></a:dk1>
+  <a:accent1><a:srgbClr val="00E3AA"/></a:accent1>
+  ```
+
+**Step 3: Parse slide master for fonts (`ppt/slideMasters/slideMaster1.xml`)**
+
+Find the font scheme:
+- `<a:fontScheme>` contains `<a:majorFont>` and `<a:minorFont>`
+- `<a:latin typeface="Font Name"/>` gives you the font families
+- Major font = headlines/display, Minor font = body text
+
+**Step 4: Extract background styles**
+
+Check `ppt/slideLayouts/slideLayout1.xml` for:
+- `<p:bg>` elements with solid fills, gradients, or image references
+- `<a:solidFill>` with color values
+- `<a:gradFill>` for gradient definitions
+
+**Step 5: Generate custom preset**
+
+Map extracted values to CSS variables:
+- `dk1` → `--text-primary` or `--bg-dark`
+- `lt1` → `--bg-primary`
+- `accent1` → `--accent`
+- `accent2-6` → `--accent-secondary`, etc.
+- majorFont → `--font-display`
+- minorFont → `--font-body`
+
+### From Website URL
+
+Fetch a company's website to extract their visual identity:
+
+**Step 1: Fetch the page**
+```bash
+curl -s https://linear.app > website.html
+```
+
+**Step 2: Extract CSS color variables**
+
+Look for in `<style>` blocks or linked CSS:
+- `:root` CSS variables like `--color-primary`, `--brand-color`, `--accent`
+- Common patterns: `primary`, `brand`, `accent`, `main`, `theme`
+- Hex codes: `#RRGGBB`, `rgb()`, `hsl()`
+
+**Step 3: Identify primary/secondary/accent colors**
+
+Priority order for extraction:
+1. Explicit brand color variables (`--color-brand`, `--primary`)
+2. Button/link colors (CTAs reveal brand colors)
+3. Header/navigation background
+4. Logo color (if SVG or inspectable)
+
+**Step 4: Extract font families**
+
+From CSS `font-family` declarations:
+- Body text font (most common `font-family`)
+- Headline font (larger sizes, different family)
+- Check Google Fonts or Fontshare URLs for exact names
+
+**Step 5: Capture logo (optional)**
+
+If accessible:
+- Look for `<img>` with "logo" in class/name
+- SVG logos in `<svg>` or `<symbol>`
+- Favicon for color reference
+
+**Step 6: Generate preset**
+
+Use extracted colors/fonts to build a custom preset matching the website's visual identity.
+
+### From Brand Guidelines PDF
+
+Read a brand guidelines PDF to extract official design tokens:
+
+**Step 1: Read the PDF**
+
+Extract text content looking for:
+- "Primary color", "Brand color", "Main color" + hex codes
+- "Secondary", "Accent", "Highlight" colors
+- Typography sections with font names
+- Color palette tables or swatches
+
+**Step 2: Identify color codes**
+
+Search patterns:
+- Hex codes: `#RRGGBB` or `#RGB`
+- RGB values: `rgb(255, 255, 255)`
+- CMYK: `C:100 M:0 Y:0 K:0` (convert to hex)
+- Pantone references (use approximate hex if provided)
+
+**Step 3: Extract typography**
+
+Look for:
+- "Primary typeface", "Brand font"
+- Headline vs. body font distinctions
+- Web-safe alternatives if specified
+
+**Step 4: Note spacing/sizing rules**
+
+If specified:
+- Minimum logo clearspace
+- Border/margin preferences (can inform `--slide-padding`)
+- Grid systems (can inform layout approach)
+
+**Step 5: Generate preset**
+
+Apply extracted values to the standard preset format, respecting the brand's official guidelines.
+
+### Output Format
+
+Each import method produces a **Custom Brand Preset** block:
+
+```css
+/* Custom Brand Preset: [Company Name] */
+:root {
+    /* Extracted Color Palette */
+    --bg-primary: #[from lt1 or website bg];
+    --bg-secondary: #[lightened primary];
+    --bg-dark: #[from dk1 or dark section];
+    --text-primary: #[from dk1 or body text];
+    --text-secondary: #[muted version];
+    --text-on-dark: #[from lt1 or white];
+    --accent: #[from accent1 or primary brand];
+    --accent-secondary: #[from accent2-6];
+    
+    /* Extracted Typography */
+    --font-display: '[majorFont]', sans-serif;
+    --font-body: '[minorFont]', sans-serif;
+    
+    /* Derived */
+    --border: rgba(0,0,0,0.1);
+    --slide-padding: 4rem;
+}
+```
+
+Include a comment header noting the source:
+```css
+/* Auto-generated from: company-deck.pptx */
+/* Auto-generated from: https://linear.app */
+/* Auto-generated from: brand-guidelines.pdf */
+```
+
+### Usage Examples
+
+**Example 1: Import from PPTX**
+```
+"Create a presentation using the brand from attached company-deck.pptx"
+```
+AI actions:
+1. Unzip and parse the PPTX theme XML
+2. Extract color scheme and fonts
+3. Generate custom preset
+4. Create presentation using extracted brand
+
+**Example 2: Import from Website URL**
+```
+"Match the brand style of https://linear.app for this pitch deck"
+```
+AI actions:
+1. Fetch linear.app homepage
+2. Extract CSS colors and fonts
+3. Build custom preset matching Linear's aesthetic
+4. Generate presentation with that styling
+
+**Example 3: Import from Brand Guidelines PDF**
+```
+"Use our brand-guidelines.pdf to style a 10-slide product launch deck"
+```
+AI actions:
+1. Read the PDF content
+2. Extract official colors, fonts, and rules
+3. Generate compliant custom preset
+4. Create presentation following brand guidelines
+
+---
+
 ## Style Presets
 
 See `STYLE_PRESETS.md` for 11 curated styles including:
