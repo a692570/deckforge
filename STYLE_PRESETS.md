@@ -13,9 +13,9 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **The default choice.** Inspired by top-tier SaaS marketing pages (like Telnyx, Linear, Vercel). Content-first with minimal decoration. Every slide feels intentional and polished.
 
 **Typography:**
-- Display: `Space Grotesk` (500/600/700) — Geometric, modern, confident
-- Body: `Inter` (400/500/600) — Clean, highly readable
-- Mono: `JetBrains Mono` (400/500) — For code, data, technical content
+- Display: `Space Grotesk` (500/600/700) - Geometric, modern, confident
+- Body: `Inter` (400/500/600) - Clean, highly readable
+- Mono: `JetBrains Mono` (400/500) - For code, data, technical content
 
 **Colors:**
 ```css
@@ -63,8 +63,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Futuristic, techy, confident, cutting-edge
 
 **Typography:**
-- Display: `Clash Display` (700) — Bold, geometric, modern
-- Body: `Satoshi` (400/500) — Clean, technical, readable
+- Display: `Clash Display` (700) - Bold, geometric, modern
+- Body: `Satoshi` (400/500) - Clean, technical, readable
 
 **Colors:**
 ```css
@@ -98,8 +98,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Premium, trustworthy, sophisticated, corporate
 
 **Typography:**
-- Display: `Libre Baskerville` (700) — Classic, authoritative
-- Body: `Source Sans 3` (400/600) — Professional, highly readable
+- Display: `Libre Baskerville` (700) - Classic, authoritative
+- Body: `Source Sans 3` (400/600) - Professional, highly readable
 
 **Colors:**
 ```css
@@ -133,8 +133,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Inspiring, vast, contemplative, visionary
 
 **Typography:**
-- Display: `Space Grotesk` (700) — Geometric, space-age
-- Body: `DM Sans` (400/500) — Modern, friendly
+- Display: `Space Grotesk` (700) - Geometric, space-age
+- Body: `DM Sans` (400/500) - Modern, friendly
 
 **Colors:**
 ```css
@@ -168,8 +168,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Developer-focused, hacker aesthetic, retro-tech
 
 **Typography:**
-- Display: `JetBrains Mono` (700) — Monospace, code-like
-- Body: `JetBrains Mono` (400) — Consistent monospace
+- Display: `JetBrains Mono` (700) - Monospace, code-like
+- Body: `JetBrains Mono` (400) - Consistent monospace
 
 **Colors:**
 ```css
@@ -205,8 +205,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Editorial, literary, thoughtful, refined
 
 **Typography:**
-- Display: `Cormorant Garamond` (700) — Elegant, editorial
-- Body: `Source Serif 4` (400) — Classic, readable
+- Display: `Cormorant Garamond` (700) - Elegant, editorial
+- Body: `Source Serif 4` (400) - Classic, readable
 
 **Colors:**
 ```css
@@ -239,8 +239,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Clean, precise, Bauhaus-inspired, geometric
 
 **Typography:**
-- Display: `Archivo` (800) — Strong, geometric
-- Body: `Nunito` (400/600) — Friendly, rounded
+- Display: `Archivo` (800) - Strong, geometric
+- Body: `Nunito` (400/600) - Friendly, rounded
 
 **Colors:**
 ```css
@@ -273,8 +273,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Friendly, approachable, creative, playful
 
 **Typography:**
-- Display: `Nunito` (800) — Rounded, warm
-- Body: `Nunito` (400/500) — Consistent warmth
+- Display: `Nunito` (800) - Rounded, warm
+- Body: `Nunito` (400/500) - Consistent warmth
 
 **Colors:**
 ```css
@@ -308,8 +308,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Human, storytelling, photographic, magazine
 
 **Typography:**
-- Display: `Playfair Display` (700) — Elegant, serif headlines
-- Body: `Work Sans` (400) — Modern, readable
+- Display: `Playfair Display` (700) - Elegant, serif headlines
+- Body: `Work Sans` (400) - Modern, readable
 
 **Colors:**
 ```css
@@ -344,8 +344,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Raw, bold, unconventional, attention-grabbing
 
 **Typography:**
-- Display: `Anton` or `Bebas Neue` (900) — Massive, compressed
-- Body: `IBM Plex Mono` (400) — Industrial
+- Display: `Anton` or `Bebas Neue` (900) - Massive, compressed
+- Body: `IBM Plex Mono` (400) - Industrial
 
 **Colors:**
 ```css
@@ -376,8 +376,8 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 **Vibe:** Modern SaaS, energetic, approachable tech
 
 **Typography:**
-- Display: `Cabinet Grotesk` (800) — Modern, confident
-- Body: `Inter` (400/500) — Only allowed for this style
+- Display: `Cabinet Grotesk` (800) - Modern, confident
+- Body: `Inter` (400/500) - Only allowed for this style
 
 **Colors:**
 ```css

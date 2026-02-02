@@ -1,167 +1,130 @@
-<!--
-Name suggestions:
-1. DeckForge — Memorable, implies crafting/creating with strength
-2. SlideCraft — Artisanal, professional feel  
-3. PitchKit — Modern, startup-friendly
-
-Selected: DeckForge
--->
-
 # DeckForge
 
-AI presentation workflow for generating polished, production-quality HTML slide decks. Built for AI coding agents with file system access — Claude Code, Cursor, Codex CLI, Windsurf, Aider, and OpenClaw.
+An AI presentation skill that generates production-quality HTML slide decks. Your agent reads the workflow, builds the slides, and exports to PPTX. You review and ship.
 
-> **Not a prompt template.** DeckForge is a structured multi-phase workflow that reads files, generates code, runs export scripts, and writes output. It requires an AI agent with terminal and file system access.
+Requires an AI coding agent with file system access: Claude Code, Cursor, Codex CLI, Windsurf, Aider, or OpenClaw.
 
-## ✨ What You Get
+## What it does
 
-- **🎨 11 Curated Themes** — From SaaS modern to cyberpunk neon to editorial elegance
-- **🏢 Brand Import** — Extract styles from existing PPTXs, websites, or brand guidelines PDFs
-- **📱 HTML Slides** — Full animations, keyboard navigation, responsive design
-- **📊 PPTX Export** — Convert to PowerPoint with styling preserved
-- **🖼️ Image Integration** — AI-generated illustrations + stock photo guidance
-- **⌨️ Interactive Navigation** — Arrow keys, touch swipes, scroll wheel support
-- **📝 Speaker Notes** — Hidden presenter notes (exported to PowerPoint too)
-- **🎯 No "AI Slop"** — Clean, professional designs without generic gradients or filler copy
+DeckForge is a structured, multi-phase workflow. It's not a prompt template you paste into a chat window. Your agent reads `SKILL.md`, follows the phases (outline, content, code, polish, export), and writes real files to disk.
 
-## 🚀 Installation
+The output is a self-contained HTML file with animated slide transitions, keyboard and touch navigation, and responsive layout. Optionally exports to PowerPoint.
 
-### Claude Code / Cursor / Codex CLI / Windsurf / Aider
+## Installation
 
-Clone into your project or workspace:
+**Claude Code, Cursor, Codex CLI, Windsurf, Aider:**
+
 ```bash
 git clone https://github.com/a692570/deckforge.git
 ```
-Reference `SKILL.md` when prompting your agent. It reads the workflow, generates an outline, writes the HTML, and runs export scripts automatically.
 
-### OpenClaw
+Point your agent at `SKILL.md` when you ask it to build a deck.
 
-Install as a skill:
+**OpenClaw:**
+
 ```bash
 cd ~/.openclaw/skills
 git clone https://github.com/a692570/deckforge.git presentation-maker
 ```
-The skill auto-loads. Just ask your agent to create a presentation.
 
-## 💡 Example Prompts
+## Requirements
+
+- An AI coding agent with file system and terminal access
+- Any capable LLM backend (Claude Opus 4.5, Sonnet 4.5, GPT-5.2, Gemini 3 Pro, etc.)
+- Python 3 + `python-pptx` if you want PowerPoint export (`pip3 install python-pptx`)
+
+No additional API keys. Everything runs locally.
+
+## Example prompts
 
 ```
-"Create a 12-slide pitch deck for my AI customer support startup targeting Series A investors"
+"Build a 12-slide pitch deck for an AI customer support startup. Audience: Series A investors."
 ```
 
 ```
-"Turn these notes into a technical presentation about Kubernetes autoscaling: [paste notes]"
+"Convert these notes into a technical presentation on Kubernetes autoscaling: [paste notes]"
 ```
 
 ```
-"Make a conference talk about the future of AI agents, 15 slides, visionary tone"
+"15-slide conference talk on the future of AI agents. Visionary tone, deep space theme."
 ```
 
-## 📋 Requirements
+## Themes
 
-**Required:**
-- An AI coding agent with file system and terminal access (Claude Code, Cursor, Codex CLI, Windsurf, Aider, or OpenClaw)
-- Any capable LLM backend (Claude Opus 4.5 / Sonnet 4.5, GPT-5.2, Gemini 3 Pro, etc.)
+11 built-in presets, plus custom brand import.
 
-**Optional:** Python 3 with `python-pptx` for PowerPoint export:
-```bash
-pip3 install python-pptx
+| Theme | Best for |
+|-------|----------|
+| **Modern SaaS** (default) | Pitch decks, product demos |
+| Neon Cyber | Tech talks, gaming |
+| Midnight Executive | Board meetings, enterprise |
+| Deep Space | Keynotes, vision talks |
+| Terminal Green | Engineering presentations |
+| Paper & Ink | Education, storytelling |
+| Swiss Modern | Design presentations |
+| Soft Pastel | Marketing, community |
+| Warm Editorial | Brand storytelling |
+| Brutalist | Creative pitches |
+| Gradient Wave | Startup pitches |
+
+Full CSS and font details in `STYLE_PRESETS.md`.
+
+## Brand import
+
+You can also extract a theme from existing assets instead of picking a preset:
+
+- **From a PPTX**: The agent unzips the file, reads `theme1.xml`, and pulls out colors, fonts, and backgrounds.
+- **From a website URL**: Fetches the page, extracts CSS colors and font families, builds a matching preset.
+- **From a brand guidelines PDF**: Parses hex codes, typography rules, and spacing from the document.
+
+```
+"Create a presentation using the brand from company-deck.pptx"
+"Match the style of https://linear.app for this pitch deck"
+"Use our brand-guidelines.pdf to style a 10-slide launch deck"
 ```
 
-No external API keys beyond your LLM. The agent does all the work locally.
+## Output
 
-## 🎨 Theme Presets
-
-| Theme | Vibe | Best For |
-|-------|------|----------|
-| **Modern SaaS** (default) | Clean, confident, developer-friendly | Pitch decks, product demos |
-| Neon Cyber | Futuristic, techy, cutting-edge | Tech talks, gaming, crypto |
-| Midnight Executive | Premium, sophisticated, corporate | Board meetings, enterprise |
-| Deep Space | Inspiring, vast, visionary | Keynotes, vision presentations |
-| Terminal Green | Developer-focused, hacker aesthetic | Engineering talks |
-| Paper & Ink | Editorial, literary, refined | Storytelling, education |
-| Swiss Modern | Precise, Bauhaus-inspired, geometric | Design presentations |
-| Soft Pastel | Friendly, approachable, creative | Marketing, community talks |
-| Warm Editorial | Human, photographic, magazine | Brand storytelling |
-| Brutalist | Raw, bold, unconventional | Creative pitches, art talks |
-| Gradient Wave | Modern SaaS, energetic | Startup pitches |
-| **Custom Brand** | Your company's exact colors/fonts | Any branded presentation |
-
-See `STYLE_PRESETS.md` for full CSS, fonts, and color codes for each theme.
-
-### 🏢 Brand Import
-
-Match your company's existing visual identity by importing from:
-
-- **Existing PPTX files** — Extract colors, fonts, and backgrounds from PowerPoint themes
-- **Company websites** — Pull CSS colors and typography from any URL
-- **Brand guidelines PDFs** — Parse official design tokens from brand documents
-
-**Example prompts:**
-```
-"Create a presentation using the brand from attached company-deck.pptx"
-"Match the brand style of https://linear.app for this pitch deck"
-"Use our brand-guidelines.pdf to style a 10-slide product launch deck"
-```
-
-Works with any AI that can read files or fetch URLs. No special API keys needed.
-
-## 📤 Output Formats
-
-Every presentation generates:
-
-- **`presentation.html`** — Full-featured HTML with animations, works offline
-- **`presentation.pptx`** — Editable PowerPoint (via export script)
-- **`presentation.pdf`** — Print-ready (export from browser)
-
-### Exporting to PowerPoint
+- `presentation.html` - Self-contained, works offline, full animations
+- `presentation.pptx` - Editable PowerPoint via export script
+- `presentation.pdf` - Print from browser
 
 ```bash
 python3 scripts/pptx_export.py presentation.html --output presentation.pptx
 ```
 
-## 📁 What's Inside
+## How the workflow runs
+
+1. Agent reads `SKILL.md` and learns the 5-phase process
+2. You describe what you need (topic, audience, tone)
+3. Agent generates an outline for your review
+4. Agent writes the full HTML with your chosen theme
+5. Export to PPTX or PDF if needed
+
+## What's in the repo
 
 ```
 deckforge/
-├── SKILL.md              # The main workflow (give this to your AI)
-├── STYLE_PRESETS.md      # 11 visual themes with CSS
-├── README.md             # This file
-├── LICENSE               # MIT License
+├── SKILL.md              # The workflow your agent follows
+├── STYLE_PRESETS.md      # 11 themes with full CSS
+├── README.md
+├── LICENSE               # MIT
 └── scripts/
-    └── pptx_export.py    # PowerPoint conversion utility
+    └── pptx_export.py    # PowerPoint export
 ```
 
-## 🎯 How It Works
-
-1. **AI reads SKILL.md** — It learns the 5-phase workflow
-2. **You describe your presentation** — Topic, audience, key messages
-3. **AI generates an outline** — You approve or adjust
-4. **AI writes the HTML** — Complete with your chosen theme
-5. **Export to any format** — HTML, PPTX, or PDF
-
-## 🎨 Design Philosophy
-
-Every slide should feel like it belongs on a top-tier SaaS marketing page:
+## Design principles
 
 - Clean typography with intentional font pairings
-- Generous whitespace — content needs room to breathe
-- Varied layouts — no two consecutive slides look identical
-- Content-first, minimal decoration
-- No generic filler copy or "purple gradient" AI slop
+- Plenty of whitespace
+- No two consecutive slides share the same layout
+- Content first, decoration second
+- No filler copy, no generic gradients
 
-## 🤝 Contributing
+## Contributing
 
-This is a community resource. Improvements welcome:
+New themes, better export scripts, workflow improvements. PRs welcome.
 
-- New themes for `STYLE_PRESETS.md`
-- Better export scripts
-- Workflow improvements to `SKILL.md`
+## License
 
-## 📄 License
-
-MIT License — free for personal and commercial use.
-
----
-
-**Made for the AI coding community** | [Report Issues](https://github.com/a692570/deckforge/issues)
+MIT. Free for personal and commercial use.

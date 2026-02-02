@@ -1,4 +1,4 @@
-# DeckForge — AI Presentation Workflow
+# DeckForge - AI Presentation Workflow
 
 Create stunning, presentation-ready slide decks from a simple topic idea. This document describes a complete workflow for generating professional HTML presentations with AI assistance.
 
@@ -31,11 +31,11 @@ Every presentation should feel like it belongs on a top-tier SaaS marketing page
 Gather the essentials before writing a single line of code.
 
 **Required inputs:**
-- **Topic** — What is this about?
-- **Audience** — Who's watching? (Investors, customers, executives, technical team, general public)
-- **Slide count** — Short (5-10), Medium (10-20), or Long (20+)
-- **Key messages** — 3-5 things the audience must remember
-- **Purpose** — Pitch deck, teaching/tutorial, conference talk, internal presentation, sales/marketing
+- **Topic** - What is this about?
+- **Audience** - Who's watching? (Investors, customers, executives, technical team, general public)
+- **Slide count** - Short (5-10), Medium (10-20), or Long (20+)
+- **Key messages** - 3-5 things the audience must remember
+- **Purpose** - Pitch deck, teaching/tutorial, conference talk, internal presentation, sales/marketing
 
 **Output: Slide-by-Slide Outline**
 
@@ -55,16 +55,16 @@ Create a detailed outline with content types for each slide:
 
 **Example outline:**
 ```
-Slide 1: title — Company name + one-line value prop
-Slide 2: content — The problem (pain points)
-Slide 3: content — The solution (your product)
-Slide 4: image-heavy — Product screenshot/demo
-Slide 5: stats — Key metrics (users, growth, revenue)
-Slide 6: comparison — Us vs. competitors
-Slide 7: quote — Customer testimonial
-Slide 8: diagram — How it works (3-step process)
-Slide 9: content — Business model
-Slide 10: closing — Call to action + contact
+Slide 1: title - Company name + one-line value prop
+Slide 2: content - The problem (pain points)
+Slide 3: content - The solution (your product)
+Slide 4: image-heavy - Product screenshot/demo
+Slide 5: stats - Key metrics (users, growth, revenue)
+Slide 6: comparison - Us vs. competitors
+Slide 7: quote - Customer testimonial
+Slide 8: diagram - How it works (3-step process)
+Slide 9: content - Business model
+Slide 10: closing - Call to action + contact
 ```
 
 Get user approval on the outline before proceeding.
@@ -77,11 +77,11 @@ Write the complete HTML presentation. This is the main creative work.
 
 **Design requirements:**
 
-1. **Varied layouts** — No two consecutive slides should look identical
-2. **Typography hierarchy** — Clear distinction between headlines, subheads, body
-3. **Generous whitespace** — Content needs room to breathe
-4. **CSS custom properties** — All colors/fonts defined in `:root` for easy theming
-5. **Image placeholders** — Mark where visuals would enhance (don't leave blank)
+1. **Varied layouts** - No two consecutive slides should look identical
+2. **Typography hierarchy** - Clear distinction between headlines, subheads, body
+3. **Generous whitespace** - Content needs room to breathe
+4. **CSS custom properties** - All colors/fonts defined in `:root` for easy theming
+5. **Image placeholders** - Mark where visuals would enhance (don't leave blank)
 
 **HTML structure:**
 ```html
@@ -137,7 +137,7 @@ Write the complete HTML presentation. This is the main creative work.
 **Layout variety examples:**
 
 ```css
-/* Title slide — centered, large type */
+/* Title slide - centered, large type */
 .slide.title-slide {
     display: flex;
     flex-direction: column;
@@ -148,7 +148,7 @@ Write the complete HTML presentation. This is the main creative work.
     color: var(--text-on-dark);
 }
 
-/* Content slide — left-aligned, generous padding */
+/* Content slide - left-aligned, generous padding */
 .slide.content-slide {
     display: flex;
     flex-direction: column;
@@ -157,7 +157,7 @@ Write the complete HTML presentation. This is the main creative work.
     background: var(--bg-primary);
 }
 
-/* Split slide — two columns */
+/* Split slide - two columns */
 .slide.split-slide {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -166,7 +166,7 @@ Write the complete HTML presentation. This is the main creative work.
     padding: var(--slide-padding);
 }
 
-/* Stats slide — big numbers */
+/* Stats slide - big numbers */
 .slide.stats-slide {
     display: flex;
     justify-content: space-around;
@@ -176,7 +176,7 @@ Write the complete HTML presentation. This is the main creative work.
 }
 .stat-number { font-size: 4rem; font-weight: 700; color: var(--accent); }
 
-/* Quote slide — testimonial style */
+/* Quote slide - testimonial style */
 .slide.quote-slide {
     display: flex;
     flex-direction: column;
@@ -270,15 +270,15 @@ Audit and refine the HTML for quality.
 
 **Review checklist:**
 ```
-□ Visual hierarchy — Is it clear what to read first?
-□ Copy quality — Punchy headlines, no filler words
-□ Layout variety — No monotony between slides
-□ Color consistency — Theme colors applied correctly
-□ Typography — Readable sizes, proper contrast
-□ Accessibility — Alt text, keyboard nav, reduced motion
-□ Image quality — Appropriate, well-placed, optimized
-□ Spacing — Generous but not excessive
-□ Animation — Subtle, not distracting
+□ Visual hierarchy - Is it clear what to read first?
+□ Copy quality - Punchy headlines, no filler words
+□ Layout variety - No monotony between slides
+□ Color consistency - Theme colors applied correctly
+□ Typography - Readable sizes, proper contrast
+□ Accessibility - Alt text, keyboard nav, reduced motion
+□ Image quality - Appropriate, well-placed, optimized
+□ Spacing - Generous but not excessive
+□ Animation - Subtle, not distracting
 ```
 
 Apply fixes directly:
@@ -321,9 +321,9 @@ Or manually:
 **Step 5.3: Delivery**
 
 Provide all three files:
-- `[name].html` — Full experience with animations
-- `[name].pptx` — Editable in Google Slides/PowerPoint
-- `[name].pdf` — Shareable, print-ready
+- `[name].html` - Full experience with animations
+- `[name].pptx` - Editable in Google Slides/PowerPoint
+- `[name].pdf` - Shareable, print-ready
 
 ---
 
@@ -371,7 +371,7 @@ unzip -q company-deck.pptx -d pptx_extracted/
 **Step 2: Parse theme XML (`ppt/theme/theme1.xml`)**
 
 Look for these elements:
-- `<a:clrScheme>` — Color scheme with names: `dk1`, `dk2`, `lt1`, `lt2`, `accent1` through `accent6`
+- `<a:clrScheme>` - Color scheme with names: `dk1`, `dk2`, `lt1`, `lt2`, `accent1` through `accent6`
 - Each color has an `<a:srgbClr val="RRGGBB"/>` or `<a:sysClr val="..."/>` element
 - Example extraction:
   ```xml
@@ -555,17 +555,17 @@ AI actions:
 
 See `STYLE_PRESETS.md` for 11 curated styles including:
 
-1. **Modern SaaS** (default) — Clean, confident, developer-friendly
-2. Neon Cyber — Futuristic, techy
-3. Midnight Executive — Premium, corporate
-4. Deep Space — Inspiring, visionary
-5. Terminal Green — Developer/hacker aesthetic
-6. Paper & Ink — Editorial, refined
-7. Swiss Modern — Precise, Bauhaus-inspired
-8. Soft Pastel — Friendly, approachable
-9. Warm Editorial — Human, storytelling
-10. Brutalist — Bold, unconventional
-11. Gradient Wave — Modern SaaS, energetic
+1. **Modern SaaS** (default) - Clean, confident, developer-friendly
+2. Neon Cyber - Futuristic, techy
+3. Midnight Executive - Premium, corporate
+4. Deep Space - Inspiring, visionary
+5. Terminal Green - Developer/hacker aesthetic
+6. Paper & Ink - Editorial, refined
+7. Swiss Modern - Precise, Bauhaus-inspired
+8. Soft Pastel - Friendly, approachable
+9. Warm Editorial - Human, storytelling
+10. Brutalist - Bold, unconventional
+11. Gradient Wave - Modern SaaS, energetic
 
 ---
 
