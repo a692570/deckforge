@@ -10,7 +10,7 @@ Curated visual styles for Presentation Maker. Each preset includes specific font
 
 **Vibe:** Clean, confident, developer-friendly, professional SaaS
 
-**The default choice.** Inspired by top-tier SaaS marketing pages (like Telnyx, Linear, Vercel). Content-first with minimal decoration. Every slide feels intentional and polished.
+**The default choice.** Inspired by top-tier SaaS marketing pages (like Linear, Vercel, Stripe). Content-first with minimal decoration. Every slide feels intentional and polished.
 
 **Typography:**
 - Display: `Space Grotesk` (500/600/700) - Geometric, modern, confident
@@ -634,3 +634,163 @@ Avoid these overused patterns that create "AI slop":
 - Gratuitous glassmorphism
 - Blurs that don't add meaning
 - Gradients for no reason
+
+---
+
+## Extended Style Presets (20 additional themes)
+
+Use when the 11 original presets don't fit the mood or when the user wants something more distinctive.
+
+| Preset | Vibe | Display Font | Body Font | Key Colors |
+|--------|------|-------------|-----------|------------|
+| Bold Signal | Confident, high-impact | Archivo Black | Space Grotesk | #1a1a1a bg, #FF5722 card |
+| Electric Studio | Bold, professional, split-panel | Manrope 800 | Manrope | #0a0a0a / #ffffff / #4361ee |
+| Creative Voltage | Energetic, retro-modern | Syne | Space Mono | #0066ff / #1a1a2e / #d4ff00 |
+| Dark Botanical | Elegant, sophisticated | Cormorant | IBM Plex Sans | #0f0f0f bg, warm gold/pink accents |
+| Notebook Tabs | Editorial, organized | Bodoni Moda | DM Sans | Cream #f8f6f1, colorful tab accents |
+| Pastel Geometry | Friendly, approachable | Plus Jakarta Sans | Plus Jakarta Sans | #c8d9e6 bg, white card, pill tabs |
+| Split Pastel | Playful, two-color vertical split | Outfit | Outfit | Peach #f5e6dc / Lavender #e4dff0 |
+| Vintage Editorial | Witty, editorial | Fraunces | Work Sans | Cream #f5f3ee, geometric shape accents |
+| Liquid Glass Bento | Asymmetric glass cards, soft blur | Manrope 800 | Manrope | #e8edf2 bg, white glass, #4361ee accent |
+| Engineering Blueprint | Annotated technical grid | JetBrains Mono Bold | DM Sans | #1a3a5c grid, white annotations, #ff8c00 callout |
+| Watercolor Map | Hand-painted annotated map | Playfair Display | Source Serif 4 | #faf3e8 cream, muted washes, #2a2a2a ink |
+| Golden Serif Quote | Oversized gold serif, interstitial | Cormorant Garamond | Cormorant Garamond | #3a2d1f brown bg, #d4a843 gold text |
+| Chalkboard Lesson | Hand-drawn diagrams, teaching | Caveat | Patrick Hand | #1f2d24 chalkboard, white chalk, #f5e6c8 accent |
+| Exploded Layer Stack | Hero exploded architecture diagram | Archivo 800 | IBM Plex Sans | #fafafa bg, #1a1a1a text, #0066cc accent |
+| Hyperreal Product | Moody studio render, product hero | Clash Display (Fontshare) | Satoshi (Fontshare) | #0a0a0a near-black, #f5f5f5 soft white, single glow accent |
+| Summary Infographic | Dense one-page summary, icon-led | Plus Jakarta Sans Bold | Plus Jakarta Sans | #ffffff bg, peach #f5e6dc / mint #d8ebd6 / lavender #e4dff0, #1a1a1a text |
+| Cobalt Grid | Studious, editorial, data-heavy | Space Grotesk | Inter | Deep blue #1a2744 bg, #e8edf2 text, #4a90d9 accent |
+| 8-Bit Orbit | Retro-tech, rebellious | Press Start 2P | VT323 | #1a1a2e bg, #e94560 accent, #16213e surface |
+| Raw Grid | Neo-brutalist, founder pitch | Archivo Black | IBM Plex Mono | #fafafa bg, #1a1a1a text, #ff3300 accent, thick borders + offset shadows |
+| Broadside | Dark editorial + fire orange | Playfair Display | DM Sans | #1a1a1a bg, #ff6b35 accent, #f5f3ee text, bilingual EN/CN |
+
+### Mood-to-Preset Mapping
+
+| Desired feeling | Preset |
+|---|---|
+| Impressed / Confident | Bold Signal, Electric Studio, Dark Botanical, Hyperreal Product |
+| Excited / Energized | Creative Voltage, Neon Cyber, Split Pastel, 8-Bit Orbit |
+| Calm / Focused | Notebook Tabs, Paper & Ink, Swiss Modern, Liquid Glass Bento, Summary Infographic |
+| Inspired / Moved | Dark Botanical, Vintage Editorial, Pastel Geometry, Watercolor Map, Golden Serif Quote |
+| Educational / Teaching | Chalkboard Lesson |
+| Technical / Architectural | Engineering Blueprint, Exploded Layer Stack, Cobalt Grid |
+| Scrappy / Founder | Raw Grid, Brutalist |
+| Editorial / Data-heavy | Broadside, Cobalt Grid, Notebook Tabs |
+
+**Font sources:** Use Fontshare (`api.fontshare.com`) for Clash Display, Satoshi, Cabinet Grotesk. Use Google Fonts for everything else. Never use system fonts (Arial, Inter, Roboto) in any generated presentation unless the theme explicitly calls for them.
+
+---
+
+## Kami Warm Editorial — Full CSS Spec
+
+Use when: user wants a "polished", "editorial", "print-quality", or "paper-like" slide deck; research presentations, white papers converted to slides, academic decks, document-style investor briefs, or any context where "Warm Editorial" is the selected theme.
+
+**Design invariants (enforce all):**
+- Canvas background: `#f5f4ed` (parchment) — never pure white
+- Single accent: ink-blue `#1B365D` — no second chromatic color
+- All grays warm-toned (yellow-brown undertone)
+- Serif (Newsreader) for display titles; sans (Inter) for body and labels
+- Serif weight locked at 500 — no bold
+- Depth via ring or whisper shadow only — no hard drop shadows
+- No italic anywhere
+
+**Full CSS token set:**
+```css
+:root {
+  --parchment:    #f5f4ed;
+  --ivory:        #faf9f5;
+  --warm-sand:    #e8e6dc;
+  --deep-dark:    #141413;
+  --dark-surface: #30302e;
+  --brand:        #1B365D;
+  --brand-light:  #2D5A8A;
+  --near-black:   #141413;
+  --charcoal:     #4d4c48;
+  --olive:        #5e5d59;
+  --stone:        #87867f;
+  --warm-silver:  #b0aea5;
+  --border-cream: #e8e5da;
+  --border-warm:  #e0ddd2;
+  --ring-warm:    #d1cfc5;
+
+  --serif: "Newsreader", "Source Serif 4", "Charter", Georgia, serif;
+  --sans:  "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono:  "JetBrains Mono", "SF Mono", Consolas, monospace;
+}
+```
+
+**Slide-scale rules (print pt to screen px conversion):**
+- `1pt = ~1.33px`; slide letter-spacing = print value / 2
+- Slide padding-top: 72-80px
+- Display title: 64px / 500 weight
+- Body: 22-26px / 400
+- Labels/eyebrows: 13-14px / 600 / all-caps / 1.5px letter-spacing
+
+**Section header component:**
+```css
+.kami-section-header .eyebrow {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--stone); margin-bottom: 14px;
+}
+.kami-section-header .eyebrow::before {
+  content: ""; display: inline-block;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--brand); flex-shrink: 0;
+}
+.kami-section-header .rule {
+  height: 1px; background: var(--border-warm);
+  margin-bottom: 36px;
+}
+.kami-section-header h1 {
+  font-family: var(--serif); font-size: 38px;
+  font-weight: 500; line-height: 1.1; color: var(--near-black);
+}
+```
+
+**Code card component (pseudocode over real code):**
+```css
+.kami-code-card {
+  background: var(--ivory);
+  border: 1px solid var(--border-cream);
+  border-radius: 8px; padding: 20px 24px;
+}
+.kami-code-card pre { font-family: var(--mono); font-size: 13px; line-height: 1.55; color: var(--near-black); margin: 0; }
+.kami-code-card .k { color: var(--brand); }
+.kami-code-card .c { color: var(--stone); }
+```
+Content philosophy: comments should outnumber code lines. Show logic, not syntax.
+
+**Tag backgrounds — always solid hex (never rgba):**
+| Alpha intent | Solid hex |
+|---|---|
+| 0.08 (lightest) | `#EEF2F7` |
+| 0.18 (standard) | `#E4ECF5` |
+| 0.30 (strong) | `#D6E1EE` |
+
+**Deck Recipe rules (long decks >20 slides):**
+| Rule | Content |
+|---|---|
+| R1 | Canvas fixed 1920x1080, scaled externally. No dynamic vh/vw on canvas |
+| R2 | Display title 64px (not H1 30px) |
+| R4 | Letter-spacing = print value / 2 |
+| R5 | Section header: gap below rule >= 36px (>= 2x gap above) |
+| R6 | Eyebrow dot: `align-items: center` not baseline |
+| R7 | Slide padding-top 72-80px |
+| R8 | Images: `object-fit: contain` + flex centering, never stretch |
+| R9 | `.kami-slide-footer` absolutely positioned to bottom for page number + deck mark |
+| R10 | Code: pseudocode style — more comment lines than code lines |
+
+**When to use Kami over other themes:**
+- Research / academic presentations
+- Document-style investor briefs (conservative industries: finance, legal, consulting)
+- White papers or long-form analyses converted to slide format
+- Any deck where "Paper & Ink" or "Warm Editorial" is selected
+- When user says "polished", "editorial", "typeset", "print-quality", or "clean sans-gradient"
+
+**Font import:**
+```html
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+```
