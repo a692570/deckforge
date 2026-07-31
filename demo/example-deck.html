@@ -281,29 +281,10 @@ p, li {
   font-weight: 600;
 }
 
-/* === Slide 4: Comparison (dark, split-bleed hero) === */
+/* === Slide 4: Comparison (dark, clean) === */
 .slide-comparison {
   background: var(--bg-dark);
-  padding: 0;
-  flex-direction: row;
 }
-.slide-comparison > .reveal {
-  padding: clamp(60px, 5vw, 100px) clamp(80px, 6vw, 140px);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.comparison-split-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: var(--bg-surface);
-  z-index: 0;
-}
-.slide-comparison > .reveal { z-index: 1; }
 .comparison-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -332,7 +313,32 @@ p, li {
 .comparison-col:nth-child(1) li { color: var(--text-muted); }
 .comparison-col:nth-child(2) li { color: var(--text-primary); }
 
-/* === Slide 5: Pipeline (dark) === */
+/* === Slide 5: Suspense question (hero break) === */
+.slide-suspense {
+  background: var(--bg-dark);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.slide-suspense .question-mark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(100px, 10vw, 160px);
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: clamp(24px, 2vw, 40px);
+}
+.slide-suspense h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 3.5vw, 60px);
+  line-height: 1.15;
+  max-width: 1200px;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+/* === Slide 6: Pipeline (dark, non-hero) === */
 .slide-pipeline {
   background: var(--bg-dark);
 }
@@ -533,7 +539,7 @@ p, li {
 </head>
 <body>
 
-<div class="progress-bar" id="progress" style="width: 12.5%"></div>
+<div class="progress-bar" id="progress" style="width: 11.1%"></div>
 
 <div class="stage" id="stage">
   <div class="canvas-wrap" id="canvas">
@@ -567,13 +573,11 @@ p, li {
       </ul>
     </section>
 
-    <!-- Slide 4: Comparison (split-bleed hero) -->
+    <!-- Slide 4: Comparison -->
     <section class="slide slide-comparison" data-slide="4" data-screen-label="04 Comparison">
-      <div class="comparison-split-bg"></div>
-      <div class="reveal">
-        <div class="eyebrow">Two approaches to deck generation</div>
-        <h2>Prompt template vs structured workflow</h2>
-        <div class="comparison-grid">
+      <div class="eyebrow reveal">Two approaches to deck generation</div>
+      <h2 class="reveal">Prompt template vs structured workflow</h2>
+      <div class="comparison-grid reveal">
         <div class="comparison-col">
           <h3>Prompt template</h3>
           <ul>
@@ -599,8 +603,14 @@ p, li {
       </div>
     </section>
 
-    <!-- Slide 5: Pipeline -->
-    <section class="slide slide-pipeline" data-slide="5" data-screen-label="05 Pipeline">
+    <!-- Slide 5: Suspense question (hero break) -->
+    <section class="slide slide-suspense" data-slide="5" data-screen-label="05 Question">
+      <div class="question-mark reveal">?</div>
+      <h2 class="reveal">So what does a structured workflow actually look like in practice?</h2>
+    </section>
+
+    <!-- Slide 6: Pipeline -->
+    <section class="slide slide-pipeline" data-slide="6" data-screen-label="06 Pipeline">
       <div class="eyebrow reveal">The 6-phase pipeline</div>
       <h2 class="reveal">Each phase has hard rules and a gate</h2>
       <div class="pipeline-steps reveal">
@@ -637,16 +647,16 @@ p, li {
       </div>
     </section>
 
-    <!-- Slide 6: Quote (hero break) -->
-    <section class="slide slide-quote" data-slide="6" data-screen-label="06 Quote">
+    <!-- Slide 7: Quote (hero break) -->
+    <section class="slide slide-quote" data-slide="7" data-screen-label="07 Quote">
       <blockquote class="reveal">
         Every slide must have a title that tells the audience what to think, not what the slide is about. If the heading is a topic label, the slide has no point.
       </blockquote>
       <div class="attribution reveal">DeckForge SKILL.md - Assertion-Evidence Principle</div>
     </section>
 
-    <!-- Slide 7: Themes (light) -->
-    <section class="slide slide-themes" data-slide="7" data-screen-label="07 Themes">
+    <!-- Slide 8: Themes (light) -->
+    <section class="slide slide-themes" data-slide="8" data-screen-label="08 Themes">
       <div class="eyebrow-light reveal">Color theory baked in</div>
       <h2 class="reveal" style="color: var(--text-on-light)">31 themes, each with validated color theory</h2>
       <div class="theme-grid reveal">
@@ -693,8 +703,8 @@ p, li {
       </div>
     </section>
 
-    <!-- Slide 8: Closing -->
-    <section class="slide slide-closing" data-slide="8" data-screen-label="08 CTA">
+    <!-- Slide 9: Closing -->
+    <section class="slide slide-closing" data-slide="9" data-screen-label="09 CTA">
       <div class="eyebrow reveal">Try it now</div>
       <h2 class="reveal">Stop prompting. Start shipping decks.</h2>
       <p class="cta-text reveal">Clone the repo, point your agent at SKILL.md, and generate a production-quality deck in minutes. 31 themes, color theory validation, PPTX export. No API keys.</p>
@@ -731,11 +741,12 @@ p, li {
     1: "This deck is a live demo. It was generated using the Bold Signal preset, a split-complementary warm palette. The color theory was validated: 60-30-10 distribution, WCAG contrast, lightness hierarchy. This is what DeckForge produces.",
     2: "1195 lines is the SKILL.md alone. Add the 837-line STYLE_PRESETS.md and you have a complete design system that prevents the most common AI deck failures before they happen.",
     3: "This is a light slide. Notice the rhythm break: slides 1-2 are dark, slide 3 is light, slide 4 is dark. No more than 2 consecutive same-weight slides. The color theory requires the accent at exactly 10% of the visual space.",
-    4: "The comparison uses temperature contrast: muted (cool gray) on the left, accent (warm orange) on the right. The comparison itself is the argument. No need to read every line, the structure makes the point.",
-    5: "Six phases, each with hard rules. Phase 3 is where most decks fail: text overflows, font sizes shrink, content disappears. Canvas Scale Architecture fixes this by fixing the canvas at 1920x1080 and scaling externally.",
-    6: "Assertion-evidence is the core storytelling rule. A heading that says 'Market Overview' tells you nothing. A heading that says 'The CIO procurement model is dying' tells you what to think. That is the difference.",
-    7: "Eight of thirty-one themes shown. Each one has a declared harmony, temperature, and 60-30-10 distribution in STYLE_PRESETS.md. The agent validates these before generating. Color is never an afterthought.",
-    8: "The CTA is in the accent color at 10% of the slide. Everything else recedes. That is how the 60-30-10 rule works: the audience's eye goes exactly where you want it to go. Clone the repo and try it."
+    4: "The comparison uses temperature contrast: muted gray on the left, accent orange on the right. The comparison itself is the argument. No need to read every line, the structure makes the point.",
+    5: "This is a suspense question slide. It is a hero break between two non-hero content slides. One question, one accent mark, nothing else. The audience leans in because they want the answer.",
+    6: "Six phases, each with hard rules. Phase 3 is where most decks fail: text overflows, font sizes shrink, content disappears. Canvas Scale Architecture fixes this by fixing the canvas at 1920x1080 and scaling externally.",
+    7: "Assertion-evidence is the core storytelling rule. A heading that says 'Market Overview' tells you nothing. A heading that says 'The CIO procurement model is dying' tells you what to think. That is the difference.",
+    8: "Eight of thirty-one themes shown. Each one has a declared harmony, temperature, and 60-30-10 distribution in STYLE_PRESETS.md. The agent validates these before generating. Color is never an afterthought.",
+    9: "The CTA is in the accent color at 10% of the slide. Everything else recedes. That is how the 60-30-10 rule works: the audience's eye goes exactly where you want it to go. Clone the repo and try it."
   };
 
   function updateNotes(idx) {
