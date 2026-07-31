@@ -38,6 +38,8 @@ Lock in four decisions before writing a single slide. Only skip a question if th
 
 **1. Aesthetic direction** — propose 3 visual directions tailored to THIS specific topic and audience. Not from a fixed preset list. Each option combines a vibe word + a concrete visual cue (palette, typography, motif) so the user can picture it. The three directions must feel meaningfully different from each other, not three flavors of the same idea. Mark one as recommended.
 
+For each direction, state the **color harmony** (monochromatic, analogous, complementary, split-complementary, triadic, neutral+accent), the **temperature** (warm, cool, neutral), and the **60-30-10 distribution** (which color is dominant, secondary, accent). This forces color decisions at the planning stage, not as an afterthought.
+
 **2. Page count** — offer brackets:
 - 3-5 slides: short / teaser
 - 6-10 slides: standard
@@ -396,12 +398,142 @@ Non-negotiable. Mixing these up is the fastest way to look AI-generated:
 
 Never use serif for body copy or sans-serif for display headings. The contrast between serif headings and sans body is what creates the editorial feel.
 
-#### Color Discipline
+#### Color Theory System
 
-- Never use pure `#FFFFFF` as a background — use paper-white (e.g., `#faf9f5`, `#f5f4ed`)
-- Never use pure `#000000` as a foreground — use ink-black (e.g., `#141413`, `#0a0a0a`)
-- One accent color per deck. No second chromatic accent.
-- When a theme is selected, swap only the designated CSS variables in `:root` — no custom hex outside those tokens.
+Color is not a decoration choice. It is a structural decision that must be validated before writing a single slide. Every DeckForge deck must pass a color theory check at three points: theme selection, slide generation, and final review.
+
+##### The 60-30-10 Rule (mandatory)
+
+Every slide must distribute color in a 60-30-10 ratio:
+
+| Proportion | Role | What it covers |
+|---|---|---|
+| 60% | Dominant | Background, large surface areas, the visual ground |
+| 30% | Secondary | Card backgrounds, section panels, supporting shapes, text blocks on the dominant |
+| 10% | Accent | CTAs, highlighted data points, active states, key emphasis |
+
+If a slide has two colors fighting for the 10% accent role, it fails. If the 30% secondary is absent, the slide reads flat. If the 60% dominant is too saturated, the deck feels aggressive.
+
+**Validation method:** Squint at the slide. You should see three distinct tonal layers. If you see only two, add a secondary surface. If you see four or more, remove one accent.
+
+##### Color Harmony (pick one scheme per deck)
+
+Each theme in STYLE_PRESETS.md declares a harmony type. The agent must verify the chosen theme's palette matches one of these six schemes before generating:
+
+| Harmony | Structure | Emotional signal | Example presets |
+|---|---|---|---|
+| **Monochromatic** | One hue, 3-5 lightness levels | Calm, focused, premium, minimal | Modern SaaS, Swiss Modern, Cobalt Grid |
+| **Analogous** | 2-3 adjacent hues on the wheel | Harmonious, natural, comfortable | Warm Editorial, Watercolor Map, Dark Botanical |
+| **Complementary** | Two opposite hues | High contrast, energetic, attention-grabbing | Brutalist, Raw Grid, 8-Bit Orbit |
+| **Split-complementary** | One hue + two adjacent to its complement | Balanced tension, dynamic, less jarring than complementary | Bold Signal, Creative Voltage |
+| **Triadic** | Three hues at 120 degree intervals | Vibrant, playful, equal weight | Soft Pastel, Split Pastel |
+| **Neutral + accent** | Grays/blacks/whites + one chromatic hue | Professional, restrained, data-forward | Paper & Ink, Midnight Executive, Terminal Green |
+
+**Rule:** Never mix harmony schemes within a single deck. If the user's brand has a triadic palette, the entire deck is triadic. Switching to monochromatic mid-deck breaks the visual system.
+
+##### Contrast Ratios (enforce at generation time)
+
+Every text-on-background pair must meet WCAG minimums:
+
+| Text role | Minimum contrast | Target contrast |
+|---|---|---|
+| Body text on background | 4.5:1 | 7:1 (AAA) |
+| Large text (>= 24px bold or >= 18.66px) | 3:1 | 4.5:1 |
+| UI components (borders, icons, focus states) | 3:1 | 4.5:1 |
+| Decorative text (disabled, placeholder) | exempt | exempt |
+
+**Common failures:**
+- White text on `#1a2744` (Cobalt Grid bg): ratio 9.8:1, PASS
+- `#a0a0a8` secondary on `#0a0a0f` (dark themes): ratio 7.2:1, PASS
+- `#00E3AA` accent on `#0A0A0A` (Modern SaaS dark): ratio 10.4:1, PASS
+- `#00E3AA` accent on white `#ffffff`: ratio 1.8:1, FAIL, never use accent for body text on light backgrounds
+- `#8a99b8` on `#1a2744`: ratio 4.8:1, PASS (borderline, use for secondary only)
+
+**Rule:** If any text pair falls below 4.5:1, darken the text or lighten the background. Never use accent colors for body text on light backgrounds, they are designed for dark surfaces and CTAs.
+
+##### Color Temperature and Mood
+
+Every palette has a temperature. Mixing temperatures without intention creates visual noise.
+
+| Temperature | Signal | Typical hues | Preset examples |
+|---|---|---|---|
+| **Warm** | Human, inviting, energetic, close | Reds, oranges, yellows, warm browns | Warm Editorial, Bold Signal, Broadside |
+| **Cool** | Rational, distant, calm, technical | Blues, greens, blue-purples | Cobalt Grid, Midnight Executive, Deep Space |
+| **Neutral** | Professional, timeless, balanced | Grays, warm whites, ink blacks | Swiss Modern, Paper & Ink, Kami Warm Editorial |
+
+**Rule:** A deck can shift temperature between slides (warm hero, cool content) if it is intentional and serves the narrative arc. Accidental temperature drift (one slide warm, next cool for no reason) is an AI tell.
+
+##### Saturation Discipline
+
+Saturation is the most overused lever in AI-generated decks. The rule: less is more.
+
+| Element | Max saturation (HSL) | Reason |
+|---|---|---|
+| Background dominant | 15% | High saturation backgrounds fatigue the eye within 3 slides |
+| Secondary surface | 25% | Supports the dominant without competing |
+| Accent / CTA | 70% | High enough to pop against the dominant |
+| Text on dark | 10% | Saturated text on dark backgrounds glows and becomes unreadable |
+| Text on light | 60% | Needs enough chroma to be distinguishable from gray |
+
+**Saturation check:** If three or more elements on a slide exceed 60% saturation, the slide will look AI-generated regardless of layout quality. Reduce saturation on the least important element until at most two high-saturation elements remain.
+
+##### Lightness Hierarchy (LCH mapping)
+
+Within a single palette, establish a clear lightness ladder. Every color must occupy a distinct rung:
+
+```
+L100  Background (lightest)
+L95   Card surface / elevated panels
+L90   Secondary surface
+L40   Primary text
+L20   Headings / emphasis
+L10   Background (darkest, for dark sections)
+L60   Accent (mid-lightness so it works on both light and dark)
+```
+
+**Rule:** No two colors in the same palette should share the same lightness value. If they do, they will visually merge and the hierarchy collapses. Verify by converting key colors to HSL lightness values and checking for collisions.
+
+##### Per-Slide Color Validation (run before delivery)
+
+Before shipping, run this check on every slide:
+
+```
+1. Does this slide follow 60-30-10? (squint test: 3 visible tonal layers)
+2. Does every text pair pass 4.5:1 contrast?
+3. Is the harmony scheme the same as the rest of the deck?
+4. Is the temperature intentional (not drifting)?
+5. Are there max 2 high-saturation (>60%) elements?
+6. Does the accent color appear only on the 10% role (CTAs, key data)?
+7. Are no two colors sharing the same lightness rung?
+8. Does the color serve the slide's emotional goal, not just look pretty?
+```
+
+If any answer is no, fix before delivery. Do not ship slides that fail color validation.
+
+##### Color and Slide Type Pairing
+
+Each slide type has a color behavior expectation. Breaking these creates dissonance:
+
+| Slide type | Color behavior | Failure mode |
+|---|---|---|
+| Cover | Dominant background + accent on title only | Too many colors on the opening = no hierarchy |
+| Big number | Number in accent, everything else muted | If the number is not the most chromatic element, it loses impact |
+| Quote | Pull-quote in accent or heading color, background neutral | If the background competes with the quote, the words lose weight |
+| Comparison | Split field: one side cool, one side warm (if intentional) | If both sides share the same palette, the comparison reads flat |
+| Data/chart | Chart elements in accent, axes/labels in neutral | If chart colors are random, the data loses credibility |
+| Closing | CTA in accent at 10%, everything else recedes | If the CTA doesn't pop, the audience doesn't act |
+
+##### Custom Brand Palette Validation
+
+When importing a brand (from PPTX, URL, or PDF), validate the extracted palette against color theory before using it:
+
+1. **Classify the harmony** — is the brand monochromatic, analogous, complementary, etc.?
+2. **Check the 60-30-10 distribution** — does the brand have a clear dominant, secondary, and accent?
+3. **Verify contrast** — do the brand's text-on-background pairs meet 4.5:1?
+4. **Identify the temperature** — warm, cool, or neutral?
+5. **Map to lightness rungs** — assign each brand color to a rung in the LCH ladder
+
+If the brand palette violates color theory (e.g., two accents at the same lightness, body text failing contrast), flag it to the user and suggest a corrected version that preserves the brand identity while fixing the structural issue.
 
 #### Design Anti-Patterns ("AI Tells")
 
@@ -425,8 +557,15 @@ Never use serif for body copy or sans-serif for display headings. The contrast b
 - Cyberpunk neon ban: dark blue `#0D1117` background + neon glow/bloom is the most saturated AI-design cliche. Only override if the user explicitly requests a hacker/terminal aesthetic
 - Multiple competing accent colors — one accent per deck, max
 - Pure black (#000000) as a background — use near-black with slight hue
+- Pure white (#FFFFFF) as a background — use paper-white with slight warm or cool tint
 - Gradient rainbow fills on backgrounds — single-color-family only if gradient is needed
 - Warm cream as the default "premium" background is now a visible AI tell. Use it only when tied to the subject, brand, or reference
+- 60-30-10 violation: two colors fighting for the 10% accent role on the same slide
+- Saturation overload: 3+ elements exceeding 60% HSL saturation on one slide
+- Lightness collision: two palette colors sharing the same LCH lightness rung, causing visual merge
+- Temperature drift: one slide warm, next slide cool, with no narrative reason
+- Harmony mixing: switching color schemes mid-deck (e.g., monochromatic cover, triadic content slides)
+- Body text in accent color on light backgrounds (accent colors are designed for dark surfaces and CTAs, not body text)
 
 **Layout:**
 - Rounded card + left colored border accent — the most recognizable AI slop pattern in decks; replace with background contrast, weight contrast, or plain divider
@@ -939,6 +1078,17 @@ Run this checklist before shipping:
 - Headings are assertion sentences, not topic labels?
 - Font weight varies across the deck (bold headings, regular body, medium labels)?
 - Title-to-body ratio is at least 2.5x?
+
+**Color theory:**
+- Does every slide follow the 60-30-10 ratio? (squint test: 3 visible tonal layers)
+- Does every text pair pass 4.5:1 contrast? (body text, large text, UI elements)
+- Is the harmony scheme consistent across the entire deck?
+- Is the color temperature intentional (no accidental drift between slides)?
+- Are there max 2 high-saturation (>60%) elements per slide?
+- Does the accent color appear only on the 10% role (CTAs, key data, active states)?
+- Are no two colors sharing the same lightness rung in the LCH ladder?
+- Does each slide type follow its color behavior expectation (cover, big number, quote, comparison, data, closing)?
+- For brand-imported palettes: was the palette validated against color theory before use?
 
 **Content:**
 - No filler copy, no banned words?

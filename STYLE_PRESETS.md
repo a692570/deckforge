@@ -1,6 +1,47 @@
 # Style Presets Reference
 
-Curated visual styles for Presentation Maker. Each preset includes specific font choices, color palettes, and animation approaches to ensure distinctive, non-generic designs.
+Curated visual styles for DeckForge. Each preset includes specific font choices, color palettes, and animation approaches to ensure distinctive, non-generic designs.
+
+Every preset is classified by **color harmony**, **temperature**, and **60-30-10 distribution** so the agent can validate color theory at theme selection time. See the Color Theory System in `SKILL.md` for the full rules.
+
+## Color Theory Quick Reference (per preset)
+
+| Preset | Harmony | Temperature | 60% Dominant | 30% Secondary | 10% Accent |
+|---|---|---|---|---|---|
+| Modern SaaS | Neutral + accent | Neutral | White / near-black | Light gray / dark gray | Green `#00E3AA` |
+| Neon Cyber | Complementary | Cool | Dark blue `#0a0f1c` | `#111827` | Cyan `#00ffcc` / Magenta `#ff00aa` |
+| Midnight Executive | Monochromatic (blue) | Cool | `#0f172a` | `#1e293b` | Blue `#3b82f6` / Gold `#fbbf24` |
+| Deep Space | Analogous (blue-purple) | Cool | `#030712` | `#111827` | Indigo `#818cf8` / Purple `#c084fc` |
+| Terminal Green | Neutral + accent | Neutral (dark) | `#0d1117` | `#161b22` | Green `#39d353` |
+| Paper & Ink | Neutral + accent | Neutral (warm) | Cream `#faf9f7` | `#f5f3ef` | Crimson `#c41e3a` |
+| Swiss Modern | Neutral + accent | Neutral | White | `#f7f7f7` | Red `#ff3300` |
+| Soft Pastel | Triadic | Warm (soft) | `#fef3f2` | `#fef9f5` | Pink `#f472b6` / Lavender `#a78bfa` / Mint `#34d399` |
+| Warm Editorial | Analogous (warm) | Warm | `#fffbf5` | `#f5efe6` | Amber `#b45309` / Blue `#0369a1` |
+| Brutalist | Complementary | Neutral (stark) | White | Black | Red `#ff0000` |
+| Gradient Wave | Analogous (blue-purple) | Cool | `#0f0f1a` | Gradient `#667eea` / `#764ba2` | Pink `#f472b6` |
+| Bold Signal | Split-complementary | Warm | `#1a1a1a` | Dark gray | Orange `#FF5722` |
+| Electric Studio | Neutral + accent | Cool | `#0a0a0a` / `#ffffff` | Mid gray | Blue `#4361ee` |
+| Creative Voltage | Split-complementary | Cool (energetic) | `#1a1a2e` | `#0066ff` | Yellow-green `#d4ff00` |
+| Dark Botanical | Analogous (dark warm) | Warm (dark) | `#0f0f0f` | Dark surfaces | Warm gold / muted pink |
+| Notebook Tabs | Neutral + accent (multi-tab) | Neutral (warm) | Cream `#f8f6f1` | White cards | Multi-color tabs |
+| Pastel Geometry | Triadic (soft) | Cool (soft) | `#c8d9e6` | White cards | Pastel pills |
+| Split Pastel | Analogous (warm-cool split) | Warm + Cool split | Peach `#f5e6dc` / Lavender `#e4dff0` | White text | Outfit accent |
+| Vintage Editorial | Neutral + accent | Warm | Cream `#f5f3ee` | Geometric shapes | Earth tones |
+| Liquid Glass Bento | Neutral + accent | Cool | `#e8edf2` | White glass cards | Blue `#4361ee` |
+| Engineering Blueprint | Monochromatic (blue) | Cool | `#1a3a5c` grid | White annotations | Orange `#ff8c00` callout |
+| Watercolor Map | Analogous (warm earth) | Warm | `#faf3e8` cream | Muted washes | Ink `#2a2a2a` |
+| Golden Serif Quote | Monochromatic (brown-gold) | Warm | `#3a2d1f` brown | Darker brown | Gold `#d4a843` |
+| Chalkboard Lesson | Neutral + accent | Neutral (dark) | `#1f2d24` chalkboard | Dark surfaces | White chalk / `#f5e6c8` |
+| Exploded Layer Stack | Neutral + accent | Neutral | `#fafafa` | `#1a1a1a` text | Blue `#0066cc` |
+| Hyperreal Product | Monochromatic (dark) | Neutral (moody) | `#0a0a0a` | `#f5f5f5` | Single glow accent |
+| Summary Infographic | Neutral + multi-accent | Neutral | White | Peach / mint / lavender cards | `#1a1a1a` text |
+| Cobalt Grid | Monochromatic (blue) | Cool | `#1a2744` | `#202d4e` / `#243156` | Blue `#4a90d9` |
+| 8-Bit Orbit | Complementary | Cool (retro) | `#1a1a2e` | `#16213e` | Red `#e94560` |
+| Raw Grid | Complementary | Neutral (stark) | `#fafafa` | `#1a1a1a` | Red `#ff3300` |
+| Broadside | Complementary (dark + fire) | Warm (dark) | `#1a1a1a` | Dark surfaces | Fire orange `#ff6b35` |
+| Kami Warm Editorial | Neutral + accent | Warm | Parchment `#f5f4ed` | Ivory `#faf9f5` / sand `#e8e6dc` | Ink-blue `#1B365D` |
+
+**Usage:** When selecting a preset, verify its harmony and temperature match the deck's emotional goal. When generating, confirm the 60-30-10 distribution is applied per slide. When reviewing, run the per-slide color validation checklist from `SKILL.md`.
 
 ---
 
