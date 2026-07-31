@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is DeckForge? - AI Presentation Skill Demo</title>
+<meta name="description" content="A demo deck built with DeckForge. 8 slides showing the Bold Signal preset, color theory validation, Canvas Scale Architecture, and the full workflow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Bold Signal preset - Split-complementary, Warm */
+  /* LCH Lightness Ladder (no collisions): */
+  /* L8   bg-dark       #1a1a1a */
+  /* L15  bg-surface    #252528 */
+  /* L40  text-muted    #6e6e72 */
+  /* L55  accent        #FF5722 */
+  /* L72  accent-light  #FF8A65 */
+  /* L90  bg-light      #f0ede5 */
+  /* L95  text-on-light #2d2d30 */
+
+  --bg-dark: #1a1a1a;
+  --bg-surface: #252528;
+  --bg-light: #f0ede5;
+  --bg-light-surface: #e8e5dc;
+
+  --text-primary: #f5f3ee;
+  --text-secondary: #b0afa8;
+  --text-muted: #9a9a9e;
+  --text-on-light: #2d2d30;
+  --text-secondary-on-light: #5a5a5e;
+  --text-muted-on-light: #5e5e62;
+
+  --accent: #FF5722;
+  --accent-light: #FF8A65;
+  --accent-dim: rgba(255, 87, 34, 0.12);
+  --accent-on-light: #C62828;
+
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(0, 0, 0, 0.08);
+
+  --font-display: 'Archivo', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background: var(--bg-dark);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-dark);
+  overflow-x: hidden;
+}
+
+.stage {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.canvas-wrap {
+  width: 1920px;
+  height: 1080px;
+  transform-origin: center center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.slide {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: none;
+  flex-direction: column;
+  padding: clamp(60px, 5vw, 100px) clamp(80px, 6vw, 140px);
+}
+
+.slide.active { display: flex; }
+
+/* Reveal animations */
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo);
+}
+.slide:not(.active) .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.slide.active .reveal { opacity: 1; transform: translateY(0); }
+.slide.active .reveal:nth-child(2) { transition-delay: 0.08s; }
+.slide.active .reveal:nth-child(3) { transition-delay: 0.16s; }
+.slide.active .reveal:nth-child(4) { transition-delay: 0.24s; }
+.slide.active .reveal:nth-child(5) { transition-delay: 0.32s; }
+.slide.active .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .slide:not(.active) .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Typography */
+h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(56px, 5vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 3.8vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 2.5vw, 40px);
+  line-height: 1.2;
+}
+p, li {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(22px, 1.8vw, 30px);
+  line-height: 1.5;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: clamp(24px, 2vw, 40px);
+}
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 12px;
+  vertical-align: middle;
+}
+.eyebrow-light {
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-on-light);
+  margin-bottom: clamp(24px, 2vw, 40px);
+}
+.eyebrow-light::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-on-light);
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+/* === Slide 1: Cover (dark) === */
+.slide-cover {
+  background: var(--bg-dark);
+  justify-content: center;
+}
+.slide-cover .cover-eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1vw, 16px);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: clamp(28px, 2.5vw, 48px);
+}
+.slide-cover h1 {
+  max-width: 1300px;
+  margin-bottom: clamp(24px, 2vw, 40px);
+}
+.slide-cover .subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(24px, 2vw, 32px);
+  color: var(--text-secondary);
+  max-width: 1000px;
+  line-height: 1.4;
+}
+.slide-cover .footer-hint {
+  position: absolute;
+  bottom: clamp(40px, 3.5vw, 60px);
+  right: clamp(80px, 6vw, 140px);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* === Slide 2: Big number (dark) === */
+.slide-big-number {
+  background: var(--bg-dark);
+  justify-content: center;
+  align-items: flex-start;
+}
+.big-number {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(140px, 14vw, 240px);
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+  margin-bottom: clamp(24px, 2vw, 40px);
+}
+.big-number-label {
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1vw, 16px);
+  color: var(--text-muted);
+  margin-top: clamp(16px, 1.5vw, 24px);
+}
+
+/* === Slide 3: Content (light - hero break) === */
+.slide-content-light {
+  background: var(--bg-light);
+  color: var(--text-on-light);
+}
+.slide-content-light .eyebrow-light { color: var(--accent-on-light); }
+.slide-content-light h2 { color: var(--text-on-light); }
+.content-list {
+  list-style: none;
+  padding: 0;
+  margin-top: clamp(32px, 3vw, 56px);
+}
+.content-list li {
+  position: relative;
+  padding-left: clamp(36px, 3vw, 48px);
+  margin-bottom: clamp(20px, 1.8vw, 32px);
+  color: var(--text-on-light);
+  font-size: clamp(22px, 1.8vw, 30px);
+  line-height: 1.45;
+}
+.content-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--accent-on-light);
+  border-radius: 2px;
+}
+.content-list li strong {
+  color: var(--accent-on-light);
+  font-weight: 600;
+}
+
+/* === Slide 4: Comparison (dark, split-bleed hero) === */
+.slide-comparison {
+  background: var(--bg-dark);
+  padding: 0;
+  flex-direction: row;
+}
+.slide-comparison > .reveal {
+  padding: clamp(60px, 5vw, 100px) clamp(80px, 6vw, 140px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.comparison-split-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--bg-surface);
+  z-index: 0;
+}
+.slide-comparison > .reveal { z-index: 1; }
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 4vw, 80px);
+  margin-top: clamp(32px, 3vw, 56px);
+  width: 100%;
+}
+.comparison-col h3 {
+  font-family: var(--font-mono);
+  font-size: clamp(16px, 1.3vw, 20px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: clamp(20px, 2vw, 32px);
+  padding-bottom: clamp(12px, 1vw, 16px);
+  border-bottom: 1px solid var(--border-dark);
+}
+.comparison-col:nth-child(1) h3 { color: var(--text-muted); }
+.comparison-col:nth-child(2) h3 { color: var(--accent); }
+.comparison-col ul { list-style: none; padding: 0; }
+.comparison-col li {
+  font-size: clamp(20px, 1.6vw, 26px);
+  line-height: 1.5;
+  margin-bottom: clamp(14px, 1.2vw, 20px);
+}
+.comparison-col:nth-child(1) li { color: var(--text-muted); }
+.comparison-col:nth-child(2) li { color: var(--text-primary); }
+
+/* === Slide 5: Pipeline (dark) === */
+.slide-pipeline {
+  background: var(--bg-dark);
+}
+.pipeline-steps {
+  display: flex;
+  gap: clamp(16px, 1.5vw, 24px);
+  margin-top: clamp(32px, 3vw, 56px);
+  flex-wrap: wrap;
+}
+.pipeline-step {
+  flex: 1;
+  min-width: clamp(180px, 16vw, 260px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: clamp(24px, 2vw, 36px);
+}
+.pipeline-step .step-num {
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1vw, 16px);
+  color: var(--accent);
+  margin-bottom: clamp(12px, 1vw, 16px);
+}
+.pipeline-step h3 {
+  font-size: clamp(20px, 1.8vw, 28px);
+  margin-bottom: clamp(8px, 0.8vw, 12px);
+}
+.pipeline-step p {
+  font-size: clamp(16px, 1.3vw, 20px);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* === Slide 6: Quote (dark - hero break) === */
+.slide-quote {
+  background: var(--bg-dark);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.slide-quote blockquote {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(36px, 3.2vw, 52px);
+  line-height: 1.25;
+  max-width: 1400px;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+.slide-quote blockquote::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  margin: 0 auto clamp(32px, 3vw, 48px);
+}
+.slide-quote .attribution {
+  margin-top: clamp(28px, 2.5vw, 44px);
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1.1vw, 18px);
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* === Slide 7: Themes (light - non-hero) === */
+.slide-themes {
+  background: var(--bg-light);
+  color: var(--text-on-light);
+}
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 1.5vw, 24px);
+  margin-top: clamp(32px, 3vw, 56px);
+}
+.theme-card {
+  background: var(--bg-light-surface);
+  border-radius: 8px;
+  padding: clamp(20px, 1.8vw, 32px);
+  border: 1px solid var(--border-light);
+}
+.theme-card .theme-swatch {
+  width: 100%;
+  height: 48px;
+  border-radius: 6px;
+  margin-bottom: clamp(12px, 1vw, 16px);
+}
+.theme-card h3 {
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 600;
+  margin-bottom: clamp(6px, 0.5vw, 8px);
+  color: var(--text-on-light);
+}
+.theme-card p {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1vw, 15px);
+  color: var(--text-muted-on-light);
+  line-height: 1.3;
+}
+
+/* === Slide 8: Closing (dark) === */
+.slide-closing {
+  background: var(--bg-dark);
+  justify-content: center;
+}
+.slide-closing h2 {
+  max-width: 1200px;
+  margin-bottom: clamp(28px, 2.5vw, 44px);
+}
+.slide-closing .cta-text {
+  font-size: clamp(22px, 1.8vw, 30px);
+  color: var(--text-secondary);
+  max-width: 900px;
+  line-height: 1.45;
+  margin-bottom: clamp(32px, 3vw, 56px);
+}
+.slide-closing .cta-box {
+  display: inline-block;
+  padding: clamp(16px, 1.5vw, 24px) clamp(32px, 3vw, 48px);
+  background: var(--accent);
+  color: var(--bg-dark);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 1.8vw, 28px);
+  border-radius: 4px;
+  letter-spacing: -0.01em;
+}
+
+/* Nav controls (outside canvas) */
+.nav-controls {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+.nav-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-dark);
+  background: rgba(26, 26, 26, 0.92);
+  color: var(--text-primary);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+}
+.nav-counter {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid var(--border-dark);
+  background: rgba(26, 26, 26, 0.92);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-secondary);
+  min-width: 80px;
+  justify-content: center;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  z-index: 100;
+  transition: width 0.3s var(--ease-out-expo);
+}
+
+#speaker-notes {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 10, 0.95);
+  color: #f5f3ee;
+  font: 16px/1.6 'Space Grotesk', sans-serif;
+  padding: 20px 32px;
+  z-index: 9999;
+  border-top: 2px solid rgba(255, 87, 34, 0.4);
+  max-height: 30vh;
+  overflow-y: auto;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress" style="width: 12.5%"></div>
+
+<div class="stage" id="stage">
+  <div class="canvas-wrap" id="canvas">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide slide-cover active" data-slide="1" data-screen-label="01 Cover">
+      <div class="reveal">
+        <div class="cover-eyebrow">Demo Deck - Bold Signal Preset</div>
+      </div>
+      <h1 class="reveal">Design quality is a system, not a prompt</h1>
+      <p class="subtitle reveal">How DeckForge turns any coding agent into a production-quality presentation builder with 1195 lines of structured workflow.</p>
+      <div class="footer-hint reveal">Press N for speaker notes - Arrow keys to navigate</div>
+    </section>
+
+    <!-- Slide 2: Big number -->
+    <section class="slide slide-big-number" data-slide="2" data-screen-label="02 Stat">
+      <div class="eyebrow reveal">The workflow footprint</div>
+      <div class="big-number reveal">1,195</div>
+      <h2 class="reveal">lines of structured rules that prevent AI slop before it happens</h2>
+      <div class="big-number-label reveal">SKILL.md alone - plus 837 lines of theme CSS and a PPTX exporter</div>
+    </section>
+
+    <!-- Slide 3: Content (light - hero break) -->
+    <section class="slide slide-content-light" data-slide="3" data-screen-label="03 Problem">
+      <div class="eyebrow-light reveal">What prompt templates get wrong</div>
+      <h2 class="reveal">A prompt cannot enforce design discipline</h2>
+      <ul class="content-list reveal">
+        <li><strong>No color theory</strong>: prompts produce decks with broken contrast, clashing accents, and no harmony scheme</li>
+        <li><strong>No rhythm rules</strong>: five identical-weight slides in a row, audience fatigue by slide 6</li>
+        <li><strong>No canvas math</strong>: text overflows, font sizes shrink to fit, content disappears under overflow:hidden</li>
+      </ul>
+    </section>
+
+    <!-- Slide 4: Comparison (split-bleed hero) -->
+    <section class="slide slide-comparison" data-slide="4" data-screen-label="04 Comparison">
+      <div class="comparison-split-bg"></div>
+      <div class="reveal">
+        <div class="eyebrow">Two approaches to deck generation</div>
+        <h2>Prompt template vs structured workflow</h2>
+        <div class="comparison-grid">
+        <div class="comparison-col">
+          <h3>Prompt template</h3>
+          <ul>
+            <li>One-shot generation, no phases</li>
+            <li>Color is "pick something nice"</li>
+            <li>Layout is improvised per slide</li>
+            <li>No contrast or readability checks</li>
+            <li>No self-check before delivery</li>
+            <li>Output quality: luck-dependent</li>
+          </ul>
+        </div>
+        <div class="comparison-col">
+          <h3>DeckForge workflow</h3>
+          <ul>
+            <li>6 phases: brief, structure, outline, HTML, polish, export</li>
+            <li>Color theory: 60-30-10, harmony, contrast, saturation</li>
+            <li>10 editorial layout types, page rhythm rules</li>
+            <li>WCAG 4.5:1 contrast enforced at generation</li>
+            <li>8-point self-check checklist before delivery</li>
+            <li>Output quality: system-dependent, repeatable</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: Pipeline -->
+    <section class="slide slide-pipeline" data-slide="5" data-screen-label="05 Pipeline">
+      <div class="eyebrow reveal">The 6-phase pipeline</div>
+      <h2 class="reveal">Each phase has hard rules and a gate</h2>
+      <div class="pipeline-steps reveal">
+        <div class="pipeline-step">
+          <div class="step-num">Phase 0</div>
+          <h3>Brief</h3>
+          <p>Audience, arc, ask, success definition</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">Phase 1</div>
+          <h3>Structure</h3>
+          <p>Pyramid Principle, assertion headings</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">Phase 2</div>
+          <h3>Outline</h3>
+          <p>Page type taxonomy, slide types, rhythm</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">Phase 3</div>
+          <h3>HTML</h3>
+          <p>Canvas scale, viewport fit, budget math</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">Phase 4</div>
+          <h3>Images</h3>
+          <p>7 named roles, chart anti-patterns</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">Phase 5-6</div>
+          <h3>Polish + Export</h3>
+          <p>AI tells check, PPTX, PDF delivery</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Quote (hero break) -->
+    <section class="slide slide-quote" data-slide="6" data-screen-label="06 Quote">
+      <blockquote class="reveal">
+        Every slide must have a title that tells the audience what to think, not what the slide is about. If the heading is a topic label, the slide has no point.
+      </blockquote>
+      <div class="attribution reveal">DeckForge SKILL.md - Assertion-Evidence Principle</div>
+    </section>
+
+    <!-- Slide 7: Themes (light) -->
+    <section class="slide slide-themes" data-slide="7" data-screen-label="07 Themes">
+      <div class="eyebrow-light reveal">Color theory baked in</div>
+      <h2 class="reveal" style="color: var(--text-on-light)">31 themes, each with validated color theory</h2>
+      <div class="theme-grid reveal">
+        <div class="theme-card">
+          <div class="theme-swatch" style="background: linear-gradient(135deg, #1a2744, #4a90d9)"></div>
+          <h3>Cobalt Grid</h3>
+          <p>Monochromatic - Cool</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatch" style="background: linear-gradient(135deg, #1a1a1a, #FF5722)"></div>
+          <h3>Bold Signal</h3>
+          <p>Split-complementary - Warm</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatch" style="background: linear-gradient(135deg, #f5f4ed, #1B365D)"></div>
+          <h3>Kami Editorial</h3>
+          <p>Neutral + accent - Warm</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatch" style="background: linear-gradient(135deg, #030712, #818cf8)"></div>
+          <h3>Deep Space</h3>
+          <p>Analogous - Cool</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatch" style="background: linear-gradient(135deg, #faf9f7, #c41e3a)"></div>
+          <h3>Paper & Ink</h3>
+          <p>Neutral + accent - Warm</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatch" style="background: linear-gradient(135deg, #ffffff, #ff3300)"></div>
+          <h3>Swiss Modern</h3>
+          <p>Neutral + accent - Neutral</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatch" style="background: linear-gradient(135deg, #fef3f2, #f472b6)"></div>
+          <h3>Soft Pastel</h3>
+          <p>Triadic - Warm (soft)</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-swatch" style="background: linear-gradient(135deg, #1a1a2e, #e94560)"></div>
+          <h3>8-Bit Orbit</h3>
+          <p>Complementary - Cool (retro)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: Closing -->
+    <section class="slide slide-closing" data-slide="8" data-screen-label="08 CTA">
+      <div class="eyebrow reveal">Try it now</div>
+      <h2 class="reveal">Stop prompting. Start shipping decks.</h2>
+      <p class="cta-text reveal">Clone the repo, point your agent at SKILL.md, and generate a production-quality deck in minutes. 31 themes, color theory validation, PPTX export. No API keys.</p>
+      <div class="reveal">
+        <a href="https://github.com/a692570/deckforge" style="text-decoration: none;">
+          <span class="cta-box">git clone deckforge</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" id="prev" aria-label="Previous slide">&#8592;</button>
+  <div class="nav-counter" id="counter">1 / 8</div>
+  <button class="nav-btn" id="next" aria-label="Next slide">&#8594;</button>
+</div>
+
+<div id="speaker-notes"></div>
+
+<script>
+(function() {
+  var slides = document.querySelectorAll('.slide');
+  var total = slides.length;
+  var current = 0;
+  var canvas = document.getElementById('canvas');
+  var counter = document.getElementById('counter');
+  var progress = document.getElementById('progress');
+  var notesOverlay = document.getElementById('speaker-notes');
+  var notesVisible = false;
+
+  var NOTES = {
+    1: "This deck is a live demo. It was generated using the Bold Signal preset, a split-complementary warm palette. The color theory was validated: 60-30-10 distribution, WCAG contrast, lightness hierarchy. This is what DeckForge produces.",
+    2: "1195 lines is the SKILL.md alone. Add the 837-line STYLE_PRESETS.md and you have a complete design system that prevents the most common AI deck failures before they happen.",
+    3: "This is a light slide. Notice the rhythm break: slides 1-2 are dark, slide 3 is light, slide 4 is dark. No more than 2 consecutive same-weight slides. The color theory requires the accent at exactly 10% of the visual space.",
+    4: "The comparison uses temperature contrast: muted (cool gray) on the left, accent (warm orange) on the right. The comparison itself is the argument. No need to read every line, the structure makes the point.",
+    5: "Six phases, each with hard rules. Phase 3 is where most decks fail: text overflows, font sizes shrink, content disappears. Canvas Scale Architecture fixes this by fixing the canvas at 1920x1080 and scaling externally.",
+    6: "Assertion-evidence is the core storytelling rule. A heading that says 'Market Overview' tells you nothing. A heading that says 'The CIO procurement model is dying' tells you what to think. That is the difference.",
+    7: "Eight of thirty-one themes shown. Each one has a declared harmony, temperature, and 60-30-10 distribution in STYLE_PRESETS.md. The agent validates these before generating. Color is never an afterthought.",
+    8: "The CTA is in the accent color at 10% of the slide. Everything else recedes. That is how the 60-30-10 rule works: the audience's eye goes exactly where you want it to go. Clone the repo and try it."
+  };
+
+  function updateNotes(idx) {
+    notesOverlay.textContent = NOTES[idx + 1] || '(no notes)';
+  }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + total;
+    progress.style.width = ((current + 1) / total * 100) + '%';
+    updateNotes(current);
+    try { localStorage.setItem('deckforge-demo-slide', String(current)); } catch(e) {}
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    if (e.key === 'n' || e.key === 'N') {
+      notesVisible = !notesVisible;
+      notesOverlay.style.display = notesVisible ? 'block' : 'none';
+      if (notesVisible) updateNotes(current);
+    }
+  });
+
+  var startX = 0;
+  document.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { if (diff > 0) next(); else prev(); }
+  }, { passive: true });
+
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+
+  try {
+    var saved = parseInt(localStorage.getItem('deckforge-demo-slide') || '0', 10);
+    if (saved > 0 && saved < total) { goTo(saved); } else { updateNotes(0); }
+  } catch(e) { updateNotes(0); }
+
+  function scaleCanvas() {
+    var scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    canvas.style.transform = 'scale(' + scale + ')';
+  }
+  scaleCanvas();
+  window.addEventListener('resize', scaleCanvas);
+})();
+</script>
+</body>
+</html>

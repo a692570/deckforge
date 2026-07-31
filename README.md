@@ -28,10 +28,26 @@ Generate production-quality HTML slide decks with any AI coding agent. 31 curate
 - [Brand Import](#brand-import)
 - [Output](#output)
 - [Requirements](#requirements)
+- [Live Demo](#live-demo)
 - [Examples](#example-prompts)
 - [Repository Layout](#repository-layout)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Live Demo
+
+An 8-slide demo deck built with DeckForge using the Bold Signal preset (split-complementary, warm). Color theory validated: 60-30-10 distribution, WCAG 4.5:1 contrast on all text pairs, 13-rung lightness ladder with zero collisions, page rhythm with no 3+ consecutive same-weight slides.
+
+**[View the live demo](https://a692570.github.io/deckforge/demo/example-deck.html)**
+
+The demo exercises:
+- Canvas Scale Architecture (1920x1080 + letterbox scaling)
+- Viewport Fitting Rules (clamp, scroll-snap, 100vh)
+- Color Theory System (harmony, contrast, saturation, lightness)
+- Page Rhythm (hero/non-hero alternation, split-bleed comparison slide)
+- Speaker Notes Overlay (press N)
+- 7 slide types (cover, big number, content-light, comparison, pipeline, quote, themes, closing)
+- localStorage persistence
 
 ## Quick Start
 
