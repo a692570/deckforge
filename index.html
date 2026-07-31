@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeckForge - AI Presentation Skill for Coding Agents</title>
+
+<!-- Primary SEO Meta Tags -->
+<title>DeckForge - AI Presentation Skill | Generate HTML Slide Decks with Any Coding Agent</title>
+<meta name="title" content="DeckForge - AI Presentation Skill | Generate HTML Slide Decks with Any Coding Agent">
+<meta name="description" content="Open-source AI presentation skill that generates production-quality HTML slide decks. 31 curated themes, Pyramid Principle storytelling, PPTX/PDF export, brand import. Works with Claude Code, Cursor, Codex CLI, Windsurf, and any agent with file system access.">
+<meta name="keywords" content="ai presentation, slide deck generator, html presentation, pptx export, ai slides, coding agent skill, claude code skill, ai pitch deck, presentation automation, developer tools, open source presentations">
+<meta name="author" content="DeckForge">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://github.com/a692570/deckforge">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://github.com/a692570/deckforge">
+<meta property="og:title" content="DeckForge - AI Presentation Skill for Coding Agents">
+<meta property="og:description" content="Generate production-quality HTML slide decks with any AI coding agent. 31 themes, Pyramid Principle storytelling, PPTX/PDF export, brand import from PPTX/URL/PDF. No API keys needed.">
+<meta property="og:site_name" content="DeckForge">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/a692570/deckforge/main/demo/og-cover.png">
+<meta property="og:image:alt" content="DeckForge - AI presentation skill generating polished HTML slide decks">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://github.com/a692570/deckforge">
+<meta name="twitter:title" content="DeckForge - AI Presentation Skill for Coding Agents">
+<meta name="twitter:description" content="Generate production-quality HTML slide decks with any AI coding agent. 31 themes, Pyramid Principle, PPTX/PDF export, brand import. No API keys needed.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/a692570/deckforge/main/demo/og-cover.png">
+<meta name="twitter:image:alt" content="DeckForge - AI presentation skill">
+
+<!-- Structured Data (JSON-LD) for Google Rich Results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "DeckForge",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "description": "AI presentation skill that generates production-quality HTML slide decks. 31 curated themes, Pyramid Principle storytelling, PPTX/PDF export, brand import. Works with Claude Code, Cursor, Codex CLI, Windsurf, and any agent with file system access.",
+  "url": "https://github.com/a692570/deckforge",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "license": "https://github.com/a692570/deckforge/blob/main/LICENSE",
+  "programmingLanguage": ["HTML", "CSS", "JavaScript", "Python"],
+  "featureList": [
+    "31 curated visual themes (11 original + 20 extended)",
+    "Kami Warm Editorial full CSS spec for print-quality decks",
+    "Pyramid Principle storytelling with assertion-evidence headings",
+    "Canvas Scale Architecture (1920x1080 + letterbox)",
+    "Viewport Fitting Rules with clamp() and scroll-snap",
+    "Vertical Budget Math before writing dense slides",
+    "Page Type Taxonomy and 10 Editorial Layout Types",
+    "Slide Background Image System with 7 named roles",
+    "Chart Anti-Patterns enforced at generation time",
+    "Designer's Eye 5-Dimension Critique rubric",
+    "Cinematic Slide Mode (22-second film clip)",
+    "Speaker Notes Overlay (N key toggle)",
+    "HTML Slide Template Library (32 templates)",
+    "Brand import from PPTX, URL, or PDF",
+    "Dual-path PPTX export (python-pptx + pptxgenjs)",
+    "PDF export via headless Chrome or Playwright"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "1"
+  }
+}
+</script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: #0a0a0f;
+  color: #e8e8ed;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero {
+  max-width: 720px;
+  padding: 60px 32px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #00E3AA, #4a90d9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .tagline {
+  font-size: 1.25rem;
+  color: #a0a0a8;
+  margin-bottom: 40px;
+}
+.hero .badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.hero .badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.hero .badge-github {
+  background: #1a1a24;
+  border: 1px solid #333;
+  color: #e8e8ed;
+}
+.hero .cta {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #00E3AA;
+  color: #0a0a0f;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero .cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 227, 170, 0.3);
+}
+.hero .stats {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+.hero .stat {
+  text-align: center;
+}
+.hero .stat-num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00E3AA;
+}
+.hero .stat-label {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>DeckForge</h1>
+  <p class="tagline">AI Presentation Skill for Coding Agents. Generate production-quality HTML slide decks with any AI coding agent. 31 themes, Pyramid Principle storytelling, PPTX/PDF export, brand import.</p>
+  <div class="badges">
+    <a href="https://github.com/a692570/deckforge" class="badge badge-github">View on GitHub</a>
+    <span class="badge badge-github">MIT License</span>
+    <span class="badge badge-github">No API Keys Needed</span>
+    <span class="badge badge-github">31 Themes</span>
+  </div>
+  <a href="https://github.com/a692570/deckforge#quick-start" class="cta">Get Started</a>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">31</div>
+      <div class="stat-label">Themes</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Workflow Phases</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Image Roles</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Layout Types</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Design Schools</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
